@@ -44,13 +44,13 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
 
     /* Picco variables */
-    --background-dark: #0D0D12;
-    --surface-dark: #1A1A22;
+    --background-dark: #0A0A0F;
+    --surface-dark: #121218;
     --primary-green: #19E6A2;
     --primary-red: #FF4D4D;
     --text-primary-light: #FFFFFF;
     --text-secondary-light: #A0AEC0;
-    --glassmorphic-bg: rgba(26, 26, 34, 0.5);
+    --glassmorphic-bg: rgba(18, 18, 24, 0.5);
     --border-color: rgba(255, 255, 255, 0.1);
   }
 
