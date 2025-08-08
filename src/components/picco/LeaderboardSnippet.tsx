@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 const leaderboardData = [
   {
     rank: 1,
-    avatar: 'https://images.unsplash.com/photo-1639747280804-dd2d6b3d88ac?q=80&w=2574&auto=format&fit=crop',
     name: 'CryptoKing',
     isVerified: true,
     correct: 254,
@@ -16,7 +15,6 @@ const leaderboardData = [
   },
   {
     rank: 2,
-    avatar: 'https://images.unsplash.com/photo-1642766324553-54b5bca73b53?q=80&w=2574&auto=format&fit=crop',
     name: 'CoinQueen',
     isVerified: false,
     correct: 248,
@@ -26,7 +24,6 @@ const leaderboardData = [
   },
   {
     rank: 3,
-    avatar: 'https://images.unsplash.com/photo-1640951613773-54706e06851d?q=80&w=2670&auto=format&fit=crop',
     name: 'HodlMaster',
     isVerified: true,
     correct: 231,

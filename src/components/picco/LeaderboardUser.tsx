@@ -2,10 +2,11 @@ import React from 'react';
 import { Award, CheckCircle, History } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { createAvatar } from '@dicebear/core';
+import { adventurerNeutral } from '@dicebear/collection';
 
 interface LeaderboardUserProps {
   rank: number;
-  avatar: string;
   name: string;
   isVerified: boolean;
   correct: number;
@@ -16,7 +17,6 @@ interface LeaderboardUserProps {
 
 export const LeaderboardUser: React.FC<LeaderboardUserProps> = ({
   rank,
-  avatar,
   name,
   isVerified,
   correct,
@@ -49,6 +49,13 @@ export const LeaderboardUser: React.FC<LeaderboardUserProps> = ({
 
   const animationClass = rankChange === 'up' ? 'animate-rank-up' : rankChange === 'down' ? 'animate-rank-down' : '';
 
+  // Generate avatar SVG using dicebear
+  const avatar = createAvatar(adventurerNeutral, {
+    seed: name,
+    size: 48,
+  });
+  const avatarSvg = avatar.toString();
+
   return (
     <div
       className={cn(
@@ -66,10 +73,12 @@ export const LeaderboardUser: React.FC<LeaderboardUserProps> = ({
         ) : (
           <p className="text-xl font-bold text-[var(--text-secondary-light)] w-8 text-center">{rank}</p>
         )}
-        <img
-          alt={`${name} Avatar`}
-          className={cn('w-12 h-12 rounded-full', currentRankStyle ? `border-2 ${currentRankStyle.avatar}` : '')}
-          src={avatar}
+        <div 
+          className={cn(
+            'w-12 h-12 rounded-full flex items-center justify-center',
+            currentRankStyle ? `border-2 ${currentRankStyle.avatar}` : ''
+          )}
+          dangerouslySetInnerHTML={{ __html: avatarSvg }}
         />
         <div className="flex-1">
           <div className="flex items-center gap-2">
