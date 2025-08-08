@@ -10,7 +10,7 @@ const navItems = [
 
 export const Footer = () => {
   return (
-    <footer className="sticky bottom-0 bg-[var(--background-dark)] border-t border-[var(--border-color)]">
+    <footer className="fixed bottom-0 left-0 right-0 bg-[var(--background-dark)] border-t border-[var(--border-color)] z-20">
       <nav className="flex justify-around items-center h-20">
         {navItems.map((item, index) => (
           <a
