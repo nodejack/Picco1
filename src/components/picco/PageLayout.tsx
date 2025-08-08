@@ -1,5 +1,4 @@
 import React from 'react';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { DesktopSidebar } from './DesktopSidebar';
 import { Footer } from './Footer';
 import { SidebarProvider } from '@/components/ui/sidebar';
@@ -9,21 +8,15 @@ interface PageLayoutProps {
 }
 
 export const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
-  const isMobile = useIsMobile();
-
   return (
-    <div className="bg-[var(--background-dark)] text-[var(--text-primary-light)]">
-      <div className="flex min-h-screen">
-        {!isMobile && (
-          <SidebarProvider>
-            <DesktopSidebar />
-          </SidebarProvider>
-        )}
-        <div className="flex-1 flex flex-col overflow-y-auto">
+    <SidebarProvider>
+      <div className="bg-[var(--background-dark)] text-[var(--text-primary-light)] flex min-h-screen">
+        <DesktopSidebar />
+        <main className="flex-1 flex flex-col min-w-0">
           {children}
-        </div>
-        {isMobile && <Footer />}
+        </main>
+        <Footer />
       </div>
-    </div>
+    </SidebarProvider>
   );
 };

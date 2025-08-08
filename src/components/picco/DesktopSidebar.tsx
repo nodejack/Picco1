@@ -23,7 +23,10 @@ export const DesktopSidebar = () => {
   };
 
   return (
-    <Sidebar isCollapsed={isCollapsed} className="hidden lg:flex h-screen sticky top-0 border-r border-[var(--border-color)]">
+    <Sidebar 
+      isCollapsed={isCollapsed} 
+      className="hidden lg:flex h-screen sticky top-0 border-r border-[var(--border-color)] bg-[var(--surface-dark)]"
+    >
       <SidebarHeader>
         <div className={cn("flex items-center gap-2", isCollapsed && "justify-center")}>
             <Sparkles className="w-8 h-8 text-[var(--primary-green)]" />
@@ -41,7 +44,7 @@ export const DesktopSidebar = () => {
                 variant={'ghost'}
                 className={cn(
                     "w-full justify-start h-12 text-base",
-                    isActive && "bg-[var(--surface-dark)] text-[var(--primary-green)] hover:bg-zinc-800 hover:text-[var(--primary-green)]",
+                    isActive && "bg-[var(--background-dark)] text-[var(--primary-green)] hover:bg-zinc-800 hover:text-[var(--primary-green)]",
                     isCollapsed && "justify-center"
                 )}
                 asChild
