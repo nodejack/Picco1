@@ -3,7 +3,7 @@ import { Award, CheckCircle, History } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { createAvatar } from '@dicebear/core';
-import { adventurerNeutral } from '@dicebear/collection';
+import { bottts } from '@dicebear/collection';
 
 interface LeaderboardUserProps {
   rank: number;
@@ -49,8 +49,8 @@ export const LeaderboardUser: React.FC<LeaderboardUserProps> = ({
 
   const animationClass = rankChange === 'up' ? 'animate-rank-up' : rankChange === 'down' ? 'animate-rank-down' : '';
 
-  // Generate avatar SVG using dicebear
-  const avatar = createAvatar(adventurerNeutral, {
+  // Generate avatar SVG using dicebear bottts
+  const avatar = createAvatar(bottts, {
     seed: name,
     size: 48,
   });
