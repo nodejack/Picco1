@@ -5,7 +5,7 @@ export const HotPredictionCard = () => {
   return (
     <section>
       <h2 className="text-2xl font-bold mb-4">Today's Hot Prediction</h2>
-      <div className="glassmorphic rounded-2xl p-4 h-full flex flex-col">
+      <div className="glassmorphic rounded-2xl p-4 flex flex-col">
         <p className="text-lg font-bold text-center mb-4">Will ETH close above $2,950 today?</p>
         <div className="flex justify-center items-center gap-4 mb-4">
           <button className="w-full py-2 text-lg font-bold rounded-xl bg-[rgba(25,230,162,0.2)] text-[var(--primary-green)] border-2 border-[var(--primary-green)] btn-glow-green">
