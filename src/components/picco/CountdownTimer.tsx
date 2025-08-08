@@ -37,20 +37,20 @@ export const CountdownTimer = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center gap-4 text-center">
+    <div className="flex items-center justify-center gap-2 text-center">
       <div>
-        <span className="text-4xl font-bold">{String(time.hours).padStart(2, '0')}</span>
-        <p className="text-sm text-[var(--text-secondary-light)]">Hours</p>
+        <span className="text-2xl font-bold">{String(time.hours).padStart(2, '0')}</span>
+        <p className="text-xs text-[var(--text-secondary-light)]">Hours</p>
       </div>
-      <span className="text-4xl font-bold text-[var(--text-secondary-light)]">:</span>
+      <span className="text-2xl font-bold text-[var(--text-secondary-light)]">:</span>
       <div>
-        <span className="text-4xl font-bold">{String(time.minutes).padStart(2, '0')}</span>
-        <p className="text-sm text-[var(--text-secondary-light)]">Minutes</p>
+        <span className="text-2xl font-bold">{String(time.minutes).padStart(2, '0')}</span>
+        <p className="text-xs text-[var(--text-secondary-light)]">Minutes</p>
       </div>
-      <span className="text-4xl font-bold text-[var(--text-secondary-light)]">:</span>
+      <span className="text-2xl font-bold text-[var(--text-secondary-light)]">:</span>
       <div>
-        <span className="text-4xl font-bold">{String(time.seconds).padStart(2, '0')}</span>
-        <p className="text-sm text-[var(--text-secondary-light)]">Seconds</p>
+        <span className="text-2xl font-bold">{String(time.seconds).padStart(2, '0')}</span>
+        <p className="text-xs text-[var(--text-secondary-light)]">Seconds</p>
       </div>
     </div>
   );
