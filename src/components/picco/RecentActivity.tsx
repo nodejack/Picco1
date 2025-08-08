@@ -12,7 +12,7 @@ export const RecentActivity = () => {
       <h2 className="text-xl font-bold">Recent Activity</h2>
       <div className="mt-4 space-y-3">
         {activities.map((activity, index) => (
-          <div key={index} className="flex items-center gap-4 rounded-xl bg-[var(--surface-dark)] p-3">
+          <div key={index} className="flex cursor-pointer items-center gap-4 rounded-xl bg-[var(--surface-dark)] p-3 transition-colors duration-200 hover:bg-zinc-800">
             <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-[var(--background-dark)]">
               {activity.type === 'Bitcoin' ? (
                 <Bitcoin className="h-7 w-7 text-yellow-400" />
