@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Activity, Trophy, User, BarChart3, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { Home, Activity, Trophy, User, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useSidebar } from '@/context/SidebarContext';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -24,11 +24,7 @@ export const Navigation = () => {
         "fixed top-16 left-0 z-20 hidden h-[calc(100vh-4rem)] flex-col justify-start border-r border-[var(--border-color)] bg-[var(--background-dark)] p-4 transition-all duration-300 md:flex",
         isCollapsed ? 'w-20' : 'w-64'
       )}>
-        <div className="flex items-center gap-2 p-4">
-          <BarChart3 className="h-8 w-8 flex-shrink-0 text-[var(--primary-green)]" />
-          {!isCollapsed && <h1 className="text-2xl font-bold text-white">Picco</h1>}
-        </div>
-        <nav className="mt-4 flex flex-col items-stretch justify-start gap-2">
+        <nav className="flex flex-col items-stretch justify-start gap-2">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             const Icon = item.icon;
