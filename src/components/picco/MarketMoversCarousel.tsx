@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import { MarketMoverCard } from './MarketMoverCard';
 import { MarketMoverCardSkeleton } from './MarketMoverCardSkeleton';
@@ -31,14 +33,43 @@ const fetchMarketMovers = async (): Promise<Coin[]> => {
 export const MarketMoversCarousel = () => {
   const { data: marketMovers, isLoading, isError } = useQuery<Coin[]>({
     queryKey: ['marketMovers'],
-    queryKeyHash: 'marketMovers', // Add this line
+    queryKeyHash: 'marketMovers',
     queryFn: fetchMarketMovers,
     staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
   });
 
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  const plugin = useRef(
+    Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: true })
+  );
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
+
+    const onSelect = () => {
+      setCurrent(api.selectedScrollSnap());
+    };
+
+    api.on("select", onSelect);
+
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
   return (
     <section className="px-4 pt-4">
       <Carousel
+        setApi={setApi}
+        plugins={[plugin.current]}
         opts={{
           align: "start",
           loop: true,
@@ -77,6 +108,18 @@ export const MarketMoversCarousel = () => {
           ))}
         </CarouselContent>
       </Carousel>
+      <div className="flex justify-center gap-2 mt-4">
+        {Array.from({ length: count }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => api?.scrollTo(index)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              index === current ? 'w-4 bg-[var(--primary-green)]' : 'w-2 bg-zinc-600'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
     </section>
   );
 };
