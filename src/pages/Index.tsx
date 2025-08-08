@@ -19,9 +19,13 @@ const Index = () => {
         isCollapsed ? "md:pl-20" : "md:pl-64"
       )}>
         <MarketMoversCarousel />
-        <HotPredictionCard />
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-4">
+          <HotPredictionCard />
+          <LeaderboardSnippet />
+        </div>
+
         <PredictionList />
-        <LeaderboardSnippet />
       </main>
     </div>
   );

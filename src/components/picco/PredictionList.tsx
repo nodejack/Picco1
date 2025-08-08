@@ -9,7 +9,8 @@ const predictions = [
 
 export const PredictionList = () => {
   return (
-    <section className="px-4 mt-6">
+    <section className="px-4">
+      <h2 className="text-2xl font-bold mb-4">More Predictions</h2>
       <div className="space-y-4">
         {predictions.map((prediction, index) => (
           <PredictionCard key={index} {...prediction} />

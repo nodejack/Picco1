@@ -38,7 +38,7 @@ const leaderboardData = [
 
 export const LeaderboardSnippet = () => {
   return (
-    <section className="p-4 mt-6">
+    <section>
       <h2 className="text-2xl font-bold mb-4">Top Predictors</h2>
       <div className="space-y-3">
         {leaderboardData.slice(0, 3).map((user) => (
