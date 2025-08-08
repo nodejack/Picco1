@@ -34,7 +34,7 @@ The application is structured into the following main pages:
 This is the main landing page of the application.
 
 -   **Header**: Displays the application name "Picco" with an animated background.
--   **Market Movers Carousel**: A horizontally scrollable carousel showcasing trending cryptocurrencies, their prices, and recent percentage changes.
+-   **Market Movers Carousel**: An auto-scrolling, infinitely looping carousel showcasing trending cryptocurrencies, complete with indicator dots.
 -   **Today's Hot Prediction**: A prominent card featuring a special daily prediction with a countdown timer and "YES"/"NO" voting buttons.
 -   **Prediction List**: A feed of other active prediction markets.
 -   **Leaderboard Snippet**: A preview of the top 3 users from the leaderboard, with a button to view the full leaderboard.
