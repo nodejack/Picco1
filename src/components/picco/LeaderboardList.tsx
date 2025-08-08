@@ -1,4 +1,5 @@
 import React from 'react';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LeaderboardUser } from './LeaderboardUser';
 
 const leaderboardData = [
@@ -61,6 +62,30 @@ const leaderboardData = [
 export const LeaderboardList = () => {
   return (
     <main className="flex-grow p-4 space-y-3">
+      <div className="flex flex-col items-center mb-4">
+        <Tabs defaultValue="global">
+          <TabsList className="bg-[var(--surface-dark)] border border-[var(--border-color)]">
+            <TabsTrigger 
+              value="global" 
+              className="data-[state=active]:bg-[var(--primary-green)] data-[state=active]:text-[var(--background-dark)] text-[var(--text-secondary-light)]"
+            >
+              Global
+            </TabsTrigger>
+            <TabsTrigger 
+              value="weekly" 
+              className="data-[state=active]:bg-[var(--primary-green)] data-[state=active]:text-[var(--background-dark)] text-[var(--text-secondary-light)]"
+            >
+              Weekly
+            </TabsTrigger>
+            <TabsTrigger 
+              value="daily" 
+              className="data-[state=active]:bg-[var(--primary-green)] data-[state=active]:text-[var(--background-dark)] text-[var(--text-secondary-light)]"
+            >
+              Daily
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
       {leaderboardData.map((user) => (
         <LeaderboardUser key={user.rank} {...user} />
       ))}
