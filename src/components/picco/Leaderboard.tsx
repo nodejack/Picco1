@@ -1,19 +1,25 @@
 import React from 'react';
-import { LeaderboardItem } from './LeaderboardItem';
-import { User } from '@/types';
+import { LeaderboardUser } from './LeaderboardUser';
 
-interface LeaderboardProps {
-  data: User[];
-}
+const leaderboardData = [
+  { rank: 1, name: 'CryptoKing', avatar: 'https://robohash.org/CryptoKing.png', points: 12500, isCurrentUser: false },
+  { rank: 2, name: 'DiamondHands', avatar: 'https://robohash.org/DiamondHands.png', points: 11800, isCurrentUser: false },
+  { rank: 3, name: 'Satoshi Jr.', avatar: 'https://robohash.org/Satoshi%20Jr.png', points: 11250, isCurrentUser: false },
+  { rank: 4, name: 'You', avatar: 'https://robohash.org/You.png', points: 10500, isCurrentUser: true },
+  { rank: 5, name: 'ToTheMoon', avatar: 'https://robohash.org/ToTheMoon.png', points: 9800, isCurrentUser: false },
+  { rank: 6, name: 'LaserEyes', avatar: 'https://robohash.org/LaserEyes.png', points: 9200, isCurrentUser: false },
+  { rank: 7, name: 'Hodler', avatar: 'https://robohash.org/Hodler.png', points: 8750, isCurrentUser: false },
+  { rank: 8, name: 'WhaleWatcher', avatar: 'https://robohash.org/WhaleWatcher.png', points: 8100, isCurrentUser: false },
+  { rank: 9, name: 'AltcoinQueen', avatar: 'https://robohash.org/AltcoinQueen.png', points: 7600, isCurrentUser: false },
+  { rank: 10, name: 'FOMO_Sapien', avatar: 'https://robohash.org/FOMO_Sapien.png', points: 7100, isCurrentUser: false },
+];
 
-export const Leaderboard = ({ data }: LeaderboardProps) => {
+export const Leaderboard = () => {
   return (
-    <div className="bg-[var(--surface-dark)] rounded-lg overflow-hidden">
-      <div className="flex flex-col">
-        {data.map((user, index) => (
-          <LeaderboardItem key={user.id} user={user} rank={index + 1} />
-        ))}
-      </div>
+    <div className="p-4 space-y-4">
+      {leaderboardData.map((user) => (
+        <LeaderboardUser key={user.rank} {...user} />
+      ))}
     </div>
   );
 };

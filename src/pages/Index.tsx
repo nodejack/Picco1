@@ -1,16 +1,25 @@
 import { Header } from "@/components/picco/Header";
-import { Leaderboard } from "@/components/picco/Leaderboard";
-import { LeaderboardHeader } from "@/components/picco/LeaderboardHeader";
-import { mockLeaderboardData } from "@/data/mockData";
+import { MarketMoversCarousel } from "@/components/picco/MarketMoversCarousel";
+import { HotPredictionCard } from "@/components/picco/HotPredictionCard";
+import { PredictionList } from "@/components/picco/PredictionList";
+import { LeaderboardSnippet } from "@/components/picco/LeaderboardSnippet";
+import { Footer } from "@/components/picco/Footer";
 
-export default function Index() {
+const Index = () => {
   return (
-    <div className="bg-[var(--background-dark)] min-h-screen">
-      <Header />
-      <main className="container mx-auto px-4 py-8">
-        <LeaderboardHeader />
-        <Leaderboard data={mockLeaderboardData} />
-      </main>
+    <div className="bg-[var(--background-dark)] text-[var(--text-primary-light)]">
+      <div className="relative flex flex-col min-h-screen overflow-x-hidden">
+        <Header />
+        <main className="flex-grow pb-20">
+          <MarketMoversCarousel />
+          <HotPredictionCard />
+          <PredictionList />
+          <LeaderboardSnippet />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
-}
+};
+
+export default Index;
