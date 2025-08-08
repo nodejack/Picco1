@@ -1,7 +1,6 @@
 import { Header } from "@/components/picco/Header";
 import { HotPredictionCard } from "@/components/picco/HotPredictionCard";
 import { PredictionList } from "@/components/picco/PredictionList";
-import { Leaderboard } from "@/components/picco/Leaderboard";
 import { Footer } from "@/components/picco/Footer";
 
 const Index = () => {
@@ -12,7 +11,6 @@ const Index = () => {
         <main className="flex-grow pb-20">
           <HotPredictionCard />
           <PredictionList />
-          <Leaderboard />
         </main>
         <Footer />
       </div>

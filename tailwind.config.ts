@@ -85,10 +85,32 @@ export default {
             height: "0",
           },
         },
+        "rank-up": {
+          "0%": {
+            transform: "translateY(5px)",
+            backgroundColor: "rgba(20, 184, 129, 0.2)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+            backgroundColor: "transparent",
+          },
+        },
+        "rank-down": {
+          "0%": {
+            transform: "translateY(-5px)",
+            backgroundColor: "rgba(239, 68, 68, 0.2)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+            backgroundColor: "transparent",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "rank-up": "rank-up 0.5s ease-in-out",
+        "rank-down": "rank-down 0.5s ease-in-out",
       },
     },
   },
