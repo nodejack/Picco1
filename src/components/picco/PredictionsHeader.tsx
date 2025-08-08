@@ -14,10 +14,25 @@ export const PredictionsHeader = () => {
           />
         </div>
         <Tabs defaultValue="all" className="hidden sm:block">
-          <TabsList>
-            <TabsTrigger value="all">All</TabsTrigger>
-            <TabsTrigger value="my-predictions">My Predictions</TabsTrigger>
-            <TabsTrigger value="following">Following</TabsTrigger>
+          <TabsList className="bg-[var(--surface-dark)] border border-[var(--border-color)]">
+            <TabsTrigger 
+              value="all" 
+              className="data-[state=active]:bg-[var(--primary-green)] data-[state=active]:text-[var(--background-dark)] text-[var(--text-secondary-light)]"
+            >
+              All
+            </TabsTrigger>
+            <TabsTrigger 
+              value="my-predictions" 
+              className="data-[state=active]:bg-[var(--primary-green)] data-[state=active]:text-[var(--background-dark)] text-[var(--text-secondary-light)]"
+            >
+              My Predictions
+            </TabsTrigger>
+            <TabsTrigger 
+              value="following" 
+              className="data-[state=active]:bg-[var(--primary-green)] data-[state=active]:text-[var(--background-dark)] text-[var(--text-secondary-light)]"
+            >
+              Following
+            </TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
