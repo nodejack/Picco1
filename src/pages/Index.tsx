@@ -20,12 +20,13 @@ const Index = () => {
       )}>
         <MarketMoversCarousel />
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-4">
-          <HotPredictionCard />
-          <LeaderboardSnippet />
+        <div className="p-4 space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <HotPredictionCard />
+            <LeaderboardSnippet />
+          </div>
+          <PredictionList />
         </div>
-
-        <PredictionList />
       </main>
     </div>
   );

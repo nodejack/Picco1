@@ -9,7 +9,7 @@ const predictions = [
 
 export const PredictionList = () => {
   return (
-    <section className="px-4">
+    <section>
       <h2 className="text-2xl font-bold mb-4">More Predictions</h2>
       <div className="space-y-4">
         {predictions.map((prediction, index) => (
