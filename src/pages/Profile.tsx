@@ -19,7 +19,7 @@ const ProfilePage = () => {
         "pt-16 pb-20 transition-all duration-300 md:pb-0",
         isCollapsed ? "md:pl-20" : "md:pl-64"
       )}>
-        <div className="p-4 sm:p-6">
+        <div className="p-4 sm:p-6 md:p-8 max-w-3xl mx-auto">
           <ProfileInfo />
           <ProfileStats />
           <Achievements />

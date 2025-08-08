@@ -8,21 +8,21 @@ const activities = [
 
 export const RecentActivity = () => {
   return (
-    <section className="mt-8">
-      <h2 className="text-xl font-bold">Recent Activity</h2>
-      <div className="mt-4 space-y-3">
+    <section className="mt-6">
+      <h2 className="text-lg md:text-base font-bold">Recent Activity</h2>
+      <div className="mt-3 space-y-2">
         {activities.map((activity, index) => (
-          <div key={index} className="flex cursor-pointer items-center gap-4 rounded-xl bg-[var(--surface-dark)] p-3 transition-colors duration-200 hover:bg-zinc-800">
-            <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-[var(--background-dark)]">
+          <div key={index} className="flex cursor-pointer items-center gap-3 rounded-lg bg-[var(--surface-dark)] p-2.5 transition-colors duration-200 hover:bg-zinc-800">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-[var(--background-dark)]">
               {activity.type === 'Bitcoin' ? (
-                <Bitcoin className="h-7 w-7 text-yellow-400" />
+                <Bitcoin className="h-5 w-5 text-yellow-400" />
               ) : (
-                <Gem className="h-7 w-7 text-gray-400" />
+                <Gem className="h-5 w-5 text-gray-400" />
               )}
             </div>
             <div className="flex-grow">
-              <p className="font-medium">{activity.type} Prediction</p>
-              <p className="text-sm text-[var(--text-secondary-light)]">
+              <p className="text-sm font-medium">{activity.type} Prediction</p>
+              <p className="text-xs text-[var(--text-secondary-light)]">
                 Result: <span className={`font-semibold ${activity.result === 'Win' ? 'text-green-400' : 'text-red-400'}`}>{activity.result}</span>
               </p>
             </div>
