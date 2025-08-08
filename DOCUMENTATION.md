@@ -11,11 +11,25 @@ This document outlines the features and components of the Picco crypto predictio
 -   **State Management**: React Query for server state (placeholder)
 -   **Notifications**: Sonner for toast notifications
 
-## 2. Pages & Routes
+## 2. Project Structure
+
+The project follows a standard React application structure:
+
+-   `src/pages`: Contains the top-level page components for each route.
+-   `src/components/ui`: Contains the base UI components from shadcn/ui. These should not be modified directly.
+-   `src/components/picco`: Contains all the custom, application-specific components built for Picco.
+-   `src/globals.css`: Defines the global styles, including the custom dark theme and color palette.
+-   `src/App.tsx`: Defines the application's routes using React Router.
+
+## 3. Data Handling
+
+**Current State**: All data within the application is currently **static and hardcoded**. This includes user lists, prediction markets, and market data. The application serves as a high-fidelity frontend prototype. The integration of a backend API would be the next logical step to make the application dynamic.
+
+## 4. Pages & Routes
 
 The application is structured into the following main pages:
 
-### 2.1. Home Page (`/`)
+### 4.1. Home Page (`/`)
 
 This is the main landing page of the application.
 
@@ -26,7 +40,7 @@ This is the main landing page of the application.
 -   **Leaderboard Snippet**: A preview of the top 3 users from the leaderboard, with a button to view the full leaderboard.
 -   **Footer Navigation**: A fixed footer providing easy navigation to Home, Predictions, Leaderboard, and Profile pages.
 
-### 2.2. Predictions Page (`/predictions`)
+### 4.2. Predictions Page (`/predictions`)
 
 This page displays a comprehensive feed of all prediction markets.
 
@@ -40,7 +54,7 @@ This page displays a comprehensive feed of all prediction markets.
 -   **Voting System**: Users can click "Vote Now" on active predictions, which opens a `VoteDialog`.
 -   **Vote Dialog**: A modal where users can cast a "Yes" or "No" vote. The dialog closes automatically after a vote is cast, and a confirmation toast is shown.
 
-### 2.3. Leaderboard Page (`/leaderboard`)
+### 4.3. Leaderboard Page (`/leaderboard`)
 
 This page ranks users based on their prediction performance.
 
@@ -52,7 +66,7 @@ This page ranks users based on their prediction performance.
 -   **Podium Styling**: The top 3 users have special gold, silver, and bronze styling on their cards.
 -   **Rank Change Animation**: Users who have moved up or down in the rankings have a subtle animation on their card.
 
-### 2.4. Profile Page (`/profile`)
+### 4.4. Profile Page (`/profile`)
 
 This page displays the user's personal information and statistics.
 
@@ -63,11 +77,11 @@ This page displays the user's personal information and statistics.
 -   **Recent Activity**: A list of the user's most recent predictions and their outcomes (Win/Loss).
 -   **Referrals**: A section with a unique, copyable referral code to invite friends.
 
-### 2.5. Not Found Page (`*`)
+### 4.5. Not Found Page (`*`)
 
 A standard 404 page is shown for any route that does not exist.
 
-## 3. Key Features & Components
+## 5. Key Features & Components
 
 -   **Responsive Design**: The UI is fully responsive and optimized for mobile devices.
 -   **Dark Theme**: The application uses a custom dark theme for a modern, sleek look.
@@ -75,7 +89,7 @@ A standard 404 page is shown for any route that does not exist.
 -   **Toast Notifications**: Non-intrusive feedback is provided for actions like voting or copying text.
 -   **Reusable Components**: The application is built with a modular component architecture, with most components located in `src/components/picco/`.
 
-## 4. Color Scheme
+## 6. Color Scheme
 
 The application uses a custom color palette defined in `src/globals.css` to achieve its distinct dark theme.
 
