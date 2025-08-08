@@ -1,4 +1,5 @@
 import { Header } from "@/components/picco/Header";
+import { MarketMoversCarousel } from "@/components/picco/MarketMoversCarousel";
 import { HotPredictionCard } from "@/components/picco/HotPredictionCard";
 import { PredictionList } from "@/components/picco/PredictionList";
 import { LeaderboardSnippet } from "@/components/picco/LeaderboardSnippet";
@@ -10,6 +11,7 @@ const Index = () => {
       <div className="relative flex flex-col min-h-screen overflow-x-hidden">
         <Header />
         <main className="flex-grow pb-20">
+          <MarketMoversCarousel />
           <HotPredictionCard />
           <PredictionList />
           <LeaderboardSnippet />
