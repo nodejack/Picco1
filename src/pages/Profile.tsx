@@ -12,10 +12,13 @@ const ProfilePage = () => {
   const { isCollapsed } = useSidebar();
 
   return (
-    <div className="bg-[var(--background-dark)] text-[var(--text-primary-light)] min-h-screen">
+    <div className="min-h-screen bg-[var(--background-dark)] text-[var(--text-primary-light)]">
+      <ProfileHeader />
       <Navigation />
-      <main className={cn("pb-20 md:pb-0 transition-all duration-300", isCollapsed ? "md:pl-20" : "md:pl-64")}>
-        <ProfileHeader />
+      <main className={cn(
+        "pt-16 pb-20 transition-all duration-300 md:pb-0",
+        isCollapsed ? "md:pl-20" : "md:pl-64"
+      )}>
         <div className="p-4 sm:p-6">
           <ProfileInfo />
           <ProfileStats />

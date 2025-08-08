@@ -1,17 +1,17 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const ProfileHeader = () => {
   const navigate = useNavigate();
-
   return (
-    <header className="sticky top-0 z-10 flex items-center bg-[var(--background-dark)]/80 p-4 pb-2 backdrop-blur-sm">
-      <Button variant="ghost" size="icon" onClick={() => navigate(-1)}>
-        <ArrowLeft className="h-6 w-6" />
-      </Button>
-      <h1 className="flex-1 text-center text-xl font-bold tracking-tight pr-10">Profile</h1>
+    <header className="fixed top-0 left-0 right-0 z-30 h-16 border-b border-[var(--border-color)] bg-[var(--background-dark)]">
+      <div className="container mx-auto flex h-full items-center px-4">
+        <Button variant="ghost" size="icon" onClick={() => navigate(-1)}>
+          <ArrowLeft className="h-6 w-6" />
+        </Button>
+        <h2 className="ml-4 text-2xl font-bold">Profile</h2>
+      </div>
     </header>
   );
 };

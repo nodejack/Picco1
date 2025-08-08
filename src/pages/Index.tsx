@@ -11,17 +11,18 @@ const Index = () => {
   const { isCollapsed } = useSidebar();
 
   return (
-    <div className="bg-[var(--background-dark)] text-[var(--text-primary-light)] min-h-screen">
+    <div className="min-h-screen bg-[var(--background-dark)] text-[var(--text-primary-light)]">
+      <Header />
       <Navigation />
-      <div className={cn("transition-all duration-300", isCollapsed ? "md:pl-20" : "md:pl-64")}>
-        <Header />
-        <main className="pb-20 md:pb-0">
-          <MarketMoversCarousel />
-          <HotPredictionCard />
-          <PredictionList />
-          <LeaderboardSnippet />
-        </main>
-      </div>
+      <main className={cn(
+        "pt-16 pb-20 transition-all duration-300 md:pb-0",
+        isCollapsed ? "md:pl-20" : "md:pl-64"
+      )}>
+        <MarketMoversCarousel />
+        <HotPredictionCard />
+        <PredictionList />
+        <LeaderboardSnippet />
+      </main>
     </div>
   );
 };
