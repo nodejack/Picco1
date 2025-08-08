@@ -35,47 +35,42 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Picco variables */
+    --background-dark: #0D0D12;
+    --surface-dark: #1A1A22;
+    --primary-green: #19E6A2;
+    --primary-red: #FF4D4D;
+    --text-primary-light: #FFFFFF;
+    --text-secondary-light: #A0AEC0;
+    --glassmorphic-bg: rgba(26, 26, 34, 0.5);
+    --border-color: rgba(255, 255, 255, 0.1);
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -97,5 +92,68 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100dvh;
   }
+}
+
+@layer components {
+  .bg-ticker-animated {
+    background: linear-gradient(90deg, var(--surface-dark), #101820, var(--surface-dark));
+    background-size: 200% 100%;
+    animation: tickerAnimation 15s linear infinite;
+  }
+
+  .text-gradient-neon {
+    background: linear-gradient(90deg, #19E6A2, #6366F1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(25, 230, 162, 0.3), 0 0 20px rgba(99, 102, 241, 0.3);
+  }
+
+  .glassmorphic {
+    background: var(--glassmorphic-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-glow-green {
+    box-shadow: 0 0 15px rgba(25, 230, 162, 0.4), 0 0 5px rgba(25, 230, 162, 0.6);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  .btn-glow-green:hover {
+    box-shadow: 0 0 25px rgba(25, 230, 162, 0.6), 0 0 10px rgba(25, 230, 162, 0.8);
+  }
+
+  .btn-glow-red {
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.4), 0 0 5px rgba(255, 77, 77, 0.6);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  .btn-glow-red:hover {
+    box-shadow: 0 0 25px rgba(255, 77, 77, 0.6), 0 0 10px rgba(255, 77, 77, 0.8);
+  }
+
+  .progress-bar-animated > div {
+    transition: width 1s ease-in-out;
+  }
+
+  .verified-badge {
+    background: linear-gradient(45deg, #4F46E5, #9333EA);
+    color: white;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+
+@keyframes tickerAnimation {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }

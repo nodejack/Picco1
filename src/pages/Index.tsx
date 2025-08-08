@@ -1,17 +1,21 @@
-// Update this page (the content is just a fallback if you fail to update the page)
-
-import { MadeWithDyad } from "@/components/made-with-dyad";
+import { Header } from "@/components/picco/Header";
+import { HotPredictionCard } from "@/components/picco/HotPredictionCard";
+import { PredictionList } from "@/components/picco/PredictionList";
+import { Leaderboard } from "@/components/picco/Leaderboard";
+import { Footer } from "@/components/picco/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">
-          Start building your amazing project here!
-        </p>
+    <div className="bg-[var(--background-dark)] text-[var(--text-primary-light)]">
+      <div className="relative flex flex-col min-h-screen overflow-x-hidden">
+        <Header />
+        <main className="flex-grow pb-20">
+          <HotPredictionCard />
+          <PredictionList />
+          <Leaderboard />
+        </main>
+        <Footer />
       </div>
-      <MadeWithDyad />
     </div>
   );
 };
