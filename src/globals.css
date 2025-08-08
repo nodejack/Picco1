@@ -106,7 +106,7 @@
 
 @layer components {
   .bg-ticker-animated {
-    background: linear-gradient(90deg, var(--surface-dark), #101820, var(--surface-dark));
+    background: linear-gradient(90deg, #000, #050507, #000);
     background-size: 200% 100%;
     animation: tickerAnimation 15s linear infinite;
   }
