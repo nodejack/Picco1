@@ -1,4 +1,5 @@
 import React from 'react';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PredictionFeedCard } from './PredictionFeedCard';
 
 const predictionsData = [
@@ -44,10 +45,36 @@ const predictionsData = [
 
 export const PredictionsFeed = () => {
   return (
-    <main className="flex-grow p-4 grid grid-cols-1 lg:grid-cols-2 gap-6 pb-20">
-      {predictionsData.map((prediction, index) => (
-        <PredictionFeedCard key={index} {...prediction} />
-      ))}
+    <main className="flex-grow p-4 pb-20">
+      <div className="flex flex-col items-center mb-4">
+        <Tabs defaultValue="all">
+          <TabsList className="bg-[var(--surface-dark)] border border-[var(--border-color)]">
+            <TabsTrigger 
+              value="all" 
+              className="data-[state=active]:bg-[var(--primary-green)] data-[state=active]:text-[var(--background-dark)] text-[var(--text-secondary-light)]"
+            >
+              All
+            </TabsTrigger>
+            <TabsTrigger 
+              value="my-predictions" 
+              className="data-[state=active]:bg-[var(--primary-green)] data-[state=active]:text-[var(--background-dark)] text-[var(--text-secondary-light)]"
+            >
+              My Predictions
+            </TabsTrigger>
+            <TabsTrigger 
+              value="following" 
+              className="data-[state=active]:bg-[var(--primary-green)] data-[state=active]:text-[var(--background-dark)] text-[var(--text-secondary-light)]"
+            >
+              Following
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {predictionsData.map((prediction, index) => (
+          <PredictionFeedCard key={index} {...prediction} />
+        ))}
+      </div>
     </main>
   );
 };
