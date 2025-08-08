@@ -8,10 +8,10 @@ export const HotPredictionCard = () => {
       <div className="glassmorphic rounded-2xl p-4 flex flex-col">
         <p className="text-lg font-bold text-center mb-4">Will ETH close above $2,950 today?</p>
         <div className="flex justify-center items-center gap-4 mb-4">
-          <button className="w-full py-2 text-lg font-bold rounded-xl bg-[rgba(25,230,162,0.2)] text-[var(--primary-green)] border-2 border-[var(--primary-green)] btn-glow-green">
+          <button className="w-full py-2 text-lg font-bold rounded-xl bg-[var(--primary-green)] text-[var(--background-dark)] hover:bg-emerald-500 transition-colors">
             YES
           </button>
-          <button className="w-full py-2 text-lg font-bold rounded-xl bg-[rgba(255,77,77,0.2)] text-[var(--primary-red)] border-2 border-[var(--primary-red)] btn-glow-red">
+          <button className="w-full py-2 text-lg font-bold rounded-xl bg-[var(--primary-red)] text-white hover:bg-red-500 transition-colors">
             NO
           </button>
         </div>
