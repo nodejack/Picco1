@@ -13,7 +13,7 @@ export const Footer = () => {
   const location = useLocation();
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-[var(--background-dark)]/80 backdrop-blur-sm border-t border-[var(--border-color)] z-20 lg:hidden">
+    <footer className="fixed bottom-0 left-0 right-0 bg-[var(--background-dark)]/80 backdrop-blur-sm border-t border-[var(--border-color)] z-20">
       <nav className="flex justify-around items-center h-20">
         {navItems.map((item, index) => {
           const isActive = location.pathname === item.path;

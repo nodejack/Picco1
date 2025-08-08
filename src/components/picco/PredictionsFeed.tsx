@@ -35,7 +35,7 @@ const predictionsData = [
 
 export const PredictionsFeed = () => {
   return (
-    <main className="flex-grow p-4 space-y-6 pb-20 lg:pb-8">
+    <main className="flex-grow p-4 space-y-6 pb-20">
       {predictionsData.map((prediction, index) => (
         <PredictionFeedCard key={index} {...prediction} />
       ))}
