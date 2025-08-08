@@ -31,11 +31,20 @@ const predictionsData = [
     consensus: 80,
     status: 'unpredicted' as const,
   },
+  {
+    icon: 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/ada.svg',
+    name: 'Cardano',
+    ticker: 'ADA',
+    timeLeft: '5d 8h left',
+    question: 'Will ADA price surpass $0.50 this month?',
+    consensus: 45,
+    status: 'unpredicted' as const,
+  },
 ];
 
 export const PredictionsFeed = () => {
   return (
-    <main className="flex-grow p-4 space-y-6 pb-20">
+    <main className="flex-grow p-4 grid grid-cols-1 lg:grid-cols-2 gap-6 pb-20">
       {predictionsData.map((prediction, index) => (
         <PredictionFeedCard key={index} {...prediction} />
       ))}
