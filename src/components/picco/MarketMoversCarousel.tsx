@@ -67,6 +67,7 @@ export const MarketMoversCarousel = () => {
 
   return (
     <section className="px-4 pt-4">
+      <h2 className="text-2xl font-bold mb-4">Market Movers</h2>
       <Carousel
         setApi={setApi}
         plugins={[plugin.current]}
