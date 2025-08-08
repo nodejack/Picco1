@@ -71,6 +71,21 @@ A standard 404 page is shown for any route that does not exist.
 
 -   **Responsive Design**: The UI is fully responsive and optimized for mobile devices.
 -   **Dark Theme**: The application uses a custom dark theme for a modern, sleek look.
--   **Interactive Elements**: Smooth transitions, hover effects, and animations are used throughout the app to enhance user experience.
+-   **Interactive Elements**: Smooth transitions, hover effects, and animations are used throughout the app to enhance user experience. This includes hover effects on the Profile page for stats, achievements, and recent activity to improve interactivity.
 -   **Toast Notifications**: Non-intrusive feedback is provided for actions like voting or copying text.
 -   **Reusable Components**: The application is built with a modular component architecture, with most components located in `src/components/picco/`.
+
+## 4. Color Scheme
+
+The application uses a custom color palette defined in `src/globals.css` to achieve its distinct dark theme.
+
+-   `--background-dark: #0A0A0F` (Main background color)
+-   `--surface-dark: #121218` (Card and surface backgrounds)
+-   `--primary-green: #19E6A2` (Primary action color, for "Yes" votes, highlights)
+-   `--primary-red: #FF4D4D` (Secondary action color, for "No" votes, negative changes)
+-   `--text-primary-light: #FFFFFF` (Primary text color)
+-   `--text-secondary-light: #A0AEC0` (Secondary text color for less important information)
+-   `--border-color: rgba(255, 255, 255, 0.1)` (Borders and separators)
+-   `--gold-color: #FFD700` (For the #1 rank on the leaderboard)
+-   `--silver-color: #C0C0C0` (For the #2 rank on the leaderboard)
+-   `--bronze-color: #CD7F32` (For the #3 rank on the leaderboard)
