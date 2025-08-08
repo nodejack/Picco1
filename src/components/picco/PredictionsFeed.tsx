@@ -3,7 +3,7 @@ import { PredictionFeedCard } from './PredictionFeedCard';
 
 const predictionsData = [
   {
-    icon: 'https://cryptologos.cc/logos/ethereum-eth-logo.png?v=032',
+    icon: 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/eth.svg',
     name: 'Ethereum',
     ticker: 'ETH',
     timeLeft: '2d 12h left',
@@ -13,7 +13,7 @@ const predictionsData = [
     status: 'active' as const,
   },
   {
-    icon: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=032',
+    icon: 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/btc.svg',
     name: 'Bitcoin',
     ticker: 'BTC',
     timeLeft: 'Closed',
@@ -23,7 +23,7 @@ const predictionsData = [
     status: 'closed' as const,
   },
   {
-    icon: 'https://cryptologos.cc/logos/solana-sol-logo.png?v=032',
+    icon: 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/sol.svg',
     name: 'Solana',
     ticker: 'SOL',
     timeLeft: '1d 4h left',

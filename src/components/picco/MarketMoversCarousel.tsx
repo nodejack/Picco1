@@ -7,9 +7,9 @@ import {
 import { MarketMoverCard } from './MarketMoverCard';
 
 const marketMovers = [
-  { icon: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=032', ticker: 'BTC', price: '$68,420.69', change: 2.5 },
-  { icon: 'https://cryptologos.cc/logos/ethereum-eth-logo.png?v=032', ticker: 'ETH', price: '$3,550.12', change: -1.2 },
-  { icon: 'https://cryptologos.cc/logos/solana-sol-logo.png?v=032', ticker: 'SOL', price: '$150.78', change: 5.8 },
+  { icon: 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/btc.svg', ticker: 'BTC', price: '$68,420.69', change: 2.5 },
+  { icon: 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/eth.svg', ticker: 'ETH', price: '$3,550.12', change: -1.2 },
+  { icon: 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/svg/color/sol.svg', ticker: 'SOL', price: '$150.78', change: 5.8 },
   { icon: 'https://cryptologos.cc/logos/binance-coin-bnb-logo.png?v=032', ticker: 'BNB', price: '$580.45', change: 0.5 },
   { icon: 'https://cryptologos.cc/logos/xrp-xrp-logo.png?v=032', ticker: 'XRP', price: '$0.52', change: -3.1 },
   { icon: 'https://cryptologos.cc/logos/cardano-ada-logo.png?v=032', ticker: 'ADA', price: '$0.45', change: 1.9 },
