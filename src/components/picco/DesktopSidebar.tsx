@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, Activity, Trophy, User, PanelLeftClose, PanelRightClose, Sparkles } from 'lucide-react';
-import { Sidebar, SidebarHeader, SidebarContent, SidebarFooter, useSidebar } from '@/components/ui/sidebar';
+import { Sidebar, SidebarHeader, SidebarContent, SidebarFooter } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -14,13 +14,7 @@ const navItems = [
 
 export const DesktopSidebar = () => {
   const location = useLocation();
-  const { isCollapsed, setIsCollapsed } = useSidebar();
-
-  const toggleSidebar = () => {
-    if (setIsCollapsed) {
-      setIsCollapsed(!isCollapsed);
-    }
-  };
+  const [isCollapsed, setIsCollapsed] = React.useState(false);
 
   return (
     <Sidebar isCollapsed={isCollapsed} className="hidden lg:flex h-screen sticky top-0 border-r border-[var(--border-color)]">
@@ -56,7 +50,7 @@ export const DesktopSidebar = () => {
         </nav>
       </SidebarContent>
       <SidebarFooter>
-        <Button variant="ghost" className="w-full justify-start h-12" onClick={toggleSidebar}>
+        <Button variant="ghost" className="w-full justify-start h-12" onClick={() => setIsCollapsed(!isCollapsed)}>
             <div className="flex items-center w-full">
                 {isCollapsed ? <PanelRightClose className="h-6 w-6 mx-auto" /> : <PanelLeftClose className="h-6 w-6 mr-4" />}
                 <span className={cn(isCollapsed && "hidden")}>Collapse</span>
