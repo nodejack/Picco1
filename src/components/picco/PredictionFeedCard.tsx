@@ -35,6 +35,7 @@ export const PredictionFeedCard: React.FC<PredictionFeedCardProps> = ({
     // In a real app, this would trigger an API call.
     console.log(`Voted ${choice} on "${question}"`);
     showSuccess(`You voted ${choice}!`);
+    setIsVoteDialogOpen(false);
   };
 
   return (
