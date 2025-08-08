@@ -41,13 +41,14 @@ export const MarketMoversCarousel = () => {
       <Carousel
         opts={{
           align: "start",
+          loop: true,
         }}
         className="w-full"
       >
         <CarouselContent className="-ml-2">
           {isLoading && (
             Array.from({ length: 5 }).map((_, index) => (
-              <CarouselItem key={index} className="pl-2 basis-[45%] sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
+              <CarouselItem key={index} className="pl-2 basis-4/5 sm:basis-1/2 md:basis-1/3">
                 <div className="p-1">
                   <MarketMoverCardSkeleton />
                 </div>
@@ -63,7 +64,7 @@ export const MarketMoversCarousel = () => {
             </CarouselItem>
           )}
           {marketMovers?.map((mover) => (
-            <CarouselItem key={mover.id} className="pl-2 basis-[45%] sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
+            <CarouselItem key={mover.id} className="pl-2 basis-4/5 sm:basis-1/2 md:basis-1/3">
               <div className="p-1">
                 <MarketMoverCard
                   icon={mover.image}
