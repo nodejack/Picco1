@@ -95,12 +95,16 @@
 
   html {
     font-size: 15px;
+    background-color: var(--background-dark);
+    overscroll-behavior: none;
   }
 
   body {
     @apply bg-background text-foreground;
     font-family: 'Space Grotesk', sans-serif;
     min-height: 100dvh;
+    background-color: var(--background-dark);
+    overscroll-behavior: none;
   }
 }
 
