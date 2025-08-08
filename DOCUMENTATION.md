@@ -1,0 +1,76 @@
+# Picco Application Documentation
+
+This document outlines the features and components of the Picco crypto prediction application.
+
+## 1. Core Technologies
+
+-   **Framework**: React with TypeScript
+-   **Routing**: React Router
+-   **Styling**: Tailwind CSS
+-   **UI Components**: shadcn/ui
+-   **State Management**: React Query for server state (placeholder)
+-   **Notifications**: Sonner for toast notifications
+
+## 2. Pages & Routes
+
+The application is structured into the following main pages:
+
+### 2.1. Home Page (`/`)
+
+This is the main landing page of the application.
+
+-   **Header**: Displays the application name "Picco" with an animated background.
+-   **Market Movers Carousel**: A horizontally scrollable carousel showcasing trending cryptocurrencies, their prices, and recent percentage changes.
+-   **Today's Hot Prediction**: A prominent card featuring a special daily prediction with a countdown timer and "YES"/"NO" voting buttons.
+-   **Prediction List**: A feed of other active prediction markets.
+-   **Leaderboard Snippet**: A preview of the top 3 users from the leaderboard, with a button to view the full leaderboard.
+-   **Footer Navigation**: A fixed footer providing easy navigation to Home, Predictions, Leaderboard, and Profile pages.
+
+### 2.2. Predictions Page (`/predictions`)
+
+This page displays a comprehensive feed of all prediction markets.
+
+-   **Predictions Header**: A sticky header containing a search bar and filter tabs for "All", "My Predictions", and "Following".
+-   **Predictions Feed**: A list of `PredictionFeedCard` components. Each card shows:
+    -   The cryptocurrency and its icon.
+    -   The prediction question.
+    -   Time remaining or "Closed" status.
+    -   Community consensus (e.g., "75% Yes").
+    -   The user's current vote, if any.
+-   **Voting System**: Users can click "Vote Now" on active predictions, which opens a `VoteDialog`.
+-   **Vote Dialog**: A modal where users can cast a "Yes" or "No" vote. The dialog closes automatically after a vote is cast, and a confirmation toast is shown.
+
+### 2.3. Leaderboard Page (`/leaderboard`)
+
+This page ranks users based on their prediction performance.
+
+-   **Leaderboard Header**: A sticky header with filters for "Global", "Weekly", and "Daily" leaderboards.
+-   **Leaderboard List**: A ranked list of users, displaying:
+    -   Rank, avatar, and name.
+    -   Stats like total correct predictions and current streak.
+    -   A "Follow" / "Following" button.
+-   **Podium Styling**: The top 3 users have special gold, silver, and bronze styling on their cards.
+-   **Rank Change Animation**: Users who have moved up or down in the rankings have a subtle animation on their card.
+
+### 2.4. Profile Page (`/profile`)
+
+This page displays the user's personal information and statistics.
+
+-   **Profile Header**: A simple header with a back button.
+-   **Profile Info**: Shows the user's avatar, name, handle, and a "Verified" badge.
+-   **Profile Stats**: Key performance indicators like "Win Rate" and total "Predictions" made.
+-   **Achievements**: A grid showcasing earned badges like "Early Adopter" and "Power User".
+-   **Recent Activity**: A list of the user's most recent predictions and their outcomes (Win/Loss).
+-   **Referrals**: A section with a unique, copyable referral code to invite friends.
+
+### 2.5. Not Found Page (`*`)
+
+A standard 404 page is shown for any route that does not exist.
+
+## 3. Key Features & Components
+
+-   **Responsive Design**: The UI is fully responsive and optimized for mobile devices.
+-   **Dark Theme**: The application uses a custom dark theme for a modern, sleek look.
+-   **Interactive Elements**: Smooth transitions, hover effects, and animations are used throughout the app to enhance user experience.
+-   **Toast Notifications**: Non-intrusive feedback is provided for actions like voting or copying text.
+-   **Reusable Components**: The application is built with a modular component architecture, with most components located in `src/components/picco/`.
