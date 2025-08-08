@@ -55,3 +55,5 @@ export const LeaderboardPage = () => {
     </div>
   );
 };
+
+export default LeaderboardPage;
