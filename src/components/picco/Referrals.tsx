@@ -32,7 +32,7 @@ export const Referrals = () => {
         <Button
           variant="ghost"
           size="icon"
-          className="absolute inset-y-0 right-0 flex items-center pr-3 text-[var(--text-secondary-light)] hover:bg-neutral-800 hover:text-white h-full"
+          className="absolute inset-y-0 right-0 flex items-center pr-3 text-[var(--text-secondary-light)] h-full"
           onClick={copyToClipboard}
         >
           <Copy className="h-5 w-5" />
