@@ -24,7 +24,7 @@ export const VoteDialog: React.FC<VoteDialogProps> = ({ isOpen, onOpenChange, qu
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[var(--surface-dark)] border-[var(--border-color)] text-white rounded-2xl">
+      <DialogContent className="bg-[var(--surface-dark)] border-[var(--border-color)] text-white rounded-2xl w-[95vw] sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-center text-xl font-bold leading-tight pt-4">{question}</DialogTitle>
         </DialogHeader>
