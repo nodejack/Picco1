@@ -20,17 +20,17 @@ export const VoteDialog: React.FC<VoteDialogProps> = ({ isOpen, onOpenChange, on
         <div className="flex justify-around py-6">
           <Button
             onClick={() => onVote('yes')}
-            className="bg-[var(--primary-green)] text-[var(--surface-dark)] rounded-full w-24 h-24 flex flex-col items-center justify-center hover:bg-[var(--primary-green)]/90 transition-all duration-300"
+            className="bg-[var(--primary-green)] text-[var(--surface-dark)] rounded-lg px-8 py-4 flex items-center justify-center hover:bg-[var(--primary-green)]/90 transition-all duration-300"
           >
-            <ThumbsUp size={32} />
-            <span className="mt-2 font-semibold">Yes</span>
+            <ThumbsUp size={24} />
+            <span className="ml-2 font-semibold">Yes</span>
           </Button>
           <Button
             onClick={() => onVote('no')}
-            className="bg-[var(--primary-red)] text-white rounded-full w-24 h-24 flex flex-col items-center justify-center hover:bg-[var(--primary-red)]/90 transition-all duration-300"
+            className="bg-[var(--primary-red)] text-white rounded-lg px-8 py-4 flex items-center justify-center hover:bg-[var(--primary-red)]/90 transition-all duration-300"
           >
-            <ThumbsDown size={32} />
-            <span className="mt-2 font-semibold">No</span>
+            <ThumbsDown size={24} />
+            <span className="ml-2 font-semibold">No</span>
           </Button>
         </div>
       </DialogContent>
