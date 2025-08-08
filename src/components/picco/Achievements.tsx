@@ -1,10 +1,10 @@
 import React from 'react';
 
 const achievements = [
-  { name: 'Early Adopter', image: 'https://images.unsplash.com/photo-1517976487-151227b498b5?q=80&w=800&auto=format&fit=crop' },
-  { name: 'Prediction Pro', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop' },
-  { name: 'Referral Rockstar', image: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=800&auto=format&fit=crop' },
-  { name: 'Daily Streak', image: 'https://images.unsplash.com/photo-1542672828-37a447524511?q=80&w=800&auto=format&fit=crop' },
+  { name: 'Early Adopter', image: 'https://images.unsplash.com/photo-1611924434489-85c1b0d6c16a?q=80&w=800&auto=format&fit=crop' },
+  { name: 'Prediction Pro', image: 'https://images.unsplash.com/photo-1599508704512-2f19efd1e35f?q=80&w=800&auto=format&fit=crop' },
+  { name: 'Referral Rockstar', image: 'https://images.unsplash.com/photo-1588590570312-359a154a7527?q=80&w=800&auto=format&fit=crop' },
+  { name: 'Daily Streak', image: 'https://images.unsplash.com/photo-1528929537232-998648138098?q=80&w=800&auto=format&fit=crop' },
 ];
 
 export const Achievements = () => {
