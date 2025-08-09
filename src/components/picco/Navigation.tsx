@@ -61,7 +61,7 @@ export const Navigation = () => {
       </aside>
 
       {/* Mobile Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 z-20 flex h-20 flex-row justify-around bg-[var(--background-dark)] md:hidden">
+      <footer className="fixed bottom-0 left-0 right-0 z-20 flex h-20 flex-row justify-around bg-[var(--background-dark)] md:hidden" style={{ paddingBottom: 'max(0px, env(safe-area-inset-bottom))' }}>
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
           const Icon = item.icon;
