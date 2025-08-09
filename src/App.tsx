@@ -9,27 +9,30 @@ import LeaderboardPage from "./pages/Leaderboard";
 import ProfilePage from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import { SidebarProvider } from "./context/SidebarContext";
+import { TelegramProvider } from "./context/TelegramContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <BrowserRouter>
-        <SidebarProvider>
-          <Toaster />
-          <Sonner />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/predictions" element={<PredictionsPage />} />
-            <Route path="/leaderboard" element={<LeaderboardPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </SidebarProvider>
-      </BrowserRouter>
-    </TooltipProvider>
+    <TelegramProvider>
+      <TooltipProvider>
+        <BrowserRouter>
+          <SidebarProvider>
+            <Toaster />
+            <Sonner />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/predictions" element={<PredictionsPage />} />
+              <Route path="/leaderboard" element={<LeaderboardPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </SidebarProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </TelegramProvider>
   </QueryClientProvider>
 );
 
