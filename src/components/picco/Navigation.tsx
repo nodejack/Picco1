@@ -60,8 +60,12 @@ export const Navigation = () => {
         </div>
       </aside>
 
-      {/* Mobile Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 z-20 flex h-20 flex-row justify-around bg-[var(--background-dark)] md:hidden" style={{ paddingBottom: 'max(0px, env(safe-area-inset-bottom))' }}>
+      {/* Mobile Footer - Enhanced for Telegram WebApp */}
+      <footer className="fixed bottom-0 left-0 right-0 z-20 flex h-24 flex-row justify-around bg-[var(--background-dark)] border-t border-[var(--border-color)] md:hidden" 
+              style={{ 
+                paddingBottom: 'max(8px, env(safe-area-inset-bottom))',
+                paddingTop: '8px'
+              }}>
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
           const Icon = item.icon;
@@ -70,12 +74,13 @@ export const Navigation = () => {
               key={item.label}
               to={item.path}
               className={cn(
-                'flex w-full flex-col items-center justify-center gap-1 p-2 transition-colors',
+                'flex w-full flex-col items-center justify-center gap-1 p-3 transition-colors min-h-[60px] touch-manipulation',
                 isActive ? 'text-[var(--primary-green)]' : 'text-[var(--text-secondary-light)]'
               )}
+              style={{ WebkitTapHighlightColor: 'transparent' }}
             >
-              <Icon className="h-7 w-7" />
-              <span className={cn('text-xs', isActive ? 'font-bold' : 'font-medium')}>
+              <Icon className="h-8 w-8 flex-shrink-0" />
+              <span className={cn('text-sm leading-tight', isActive ? 'font-bold' : 'font-medium')}>
                 {item.label}
               </span>
             </Link>

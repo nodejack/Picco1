@@ -15,9 +15,9 @@ const Index = () => {
       <Header />
       <Navigation />
       <main className={cn(
-        "pt-16 pb-20 transition-all duration-300 md:pb-0",
+        "pt-16 pb-24 transition-all duration-300 md:pb-0",
         isCollapsed ? "md:pl-20" : "md:pl-64"
-      )} style={{ paddingBottom: 'calc(5rem + max(0px, env(safe-area-inset-bottom)))' }}>
+      )} style={{ paddingBottom: 'calc(6rem + max(8px, env(safe-area-inset-bottom)))' }}>
         <MarketMoversCarousel />
         
         <div className="p-4 space-y-6">

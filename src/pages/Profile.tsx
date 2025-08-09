@@ -16,9 +16,9 @@ const ProfilePage = () => {
       <ProfileHeader />
       <Navigation />
       <main className={cn(
-        "pt-16 pb-20 transition-all duration-300 md:pb-0",
+        "pt-16 pb-24 transition-all duration-300 md:pb-0",
         isCollapsed ? "md:pl-20" : "md:pl-64"
-      )} style={{ paddingBottom: 'calc(5rem + max(0px, env(safe-area-inset-bottom)))' }}>
+      )} style={{ paddingBottom: 'calc(6rem + max(8px, env(safe-area-inset-bottom)))' }}>
         <div className="p-4 sm:p-6 md:p-8 max-w-3xl mx-auto">
           <ProfileInfo />
           <ProfileStats />
