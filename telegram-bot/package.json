@@ -1,0 +1,29 @@
+{
+  "name": "picco-telegram-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot for Picco crypto prediction app",
+  "main": "telegram-bot.js",
+  "scripts": {
+    "start": "node telegram-bot.js",
+    "dev": "nodemon telegram-bot.js"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.64.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "crypto",
+    "predictions",
+    "picco"
+  ],
+  "author": "Picco Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
