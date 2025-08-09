@@ -26,28 +26,32 @@ Make predictions on cryptocurrency price movements and compete with other trader
 • Real-time predictions and voting
 • Global leaderboard competition
 • User profiles and achievements
-• Mobile-optimized interface
+• Native Telegram integration
 
-Click the button below to launch the app!`;
+Launch the app to start predicting!`;
 
   const keyboard = {
     inline_keyboard: [
       [
         {
-          text: "🚀 Launch Picco App",
-          url: APP_URL,
+          text: "🚀 Launch Picco",
+          web_app: {
+            url: APP_URL,
+          },
         },
       ],
       [
         {
-          text: "📊 View Leaderboard",
-          url: `${APP_URL}/leaderboard`,
+          text: "📊 Leaderboard",
+          web_app: {
+            url: `${APP_URL}/leaderboard`,
+          },
         },
-      ],
-      [
         {
-          text: "🎯 Make Predictions",
-          url: `${APP_URL}/predictions`,
+          text: "🎯 Predictions",
+          web_app: {
+            url: `${APP_URL}/predictions`,
+          },
         },
       ],
     ],
@@ -90,7 +94,9 @@ bot.onText(/\/leaderboard/, async (msg) => {
       [
         {
           text: "🏆 View Leaderboard",
-          url: `${APP_URL}/leaderboard`,
+          web_app: {
+            url: `${APP_URL}/leaderboard`,
+          },
         },
       ],
     ],
@@ -115,7 +121,9 @@ bot.onText(/\/predictions/, async (msg) => {
       [
         {
           text: "🎯 Make Predictions",
-          url: `${APP_URL}/predictions`,
+          web_app: {
+            url: `${APP_URL}/predictions`,
+          },
         },
       ],
     ],
