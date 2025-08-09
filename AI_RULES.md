@@ -1,129 +1,165 @@
 # Tech Stack
 
-- You are building a React application.
-- Use TypeScript.
-- Use React Router. KEEP the routes in src/App.tsx
-- Always put source code in the src folder.
-- Put pages into src/pages/
-- Put components into src/components/
-- The main page (default page) is src/pages/Index.tsx
-- UPDATE the main page to include the new components. OTHERWISE, the user can NOT see any components!
-- ALWAYS try to use the shadcn/ui library.
-- Tailwind CSS: always use Tailwind CSS for styling components. Utilize Tailwind classes extensively for layout, spacing, colors, and other design aspects.
+- **Framework**: React with TypeScript
+- **Routing**: React Router
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **State Management**: React Query for server state
+- **Notifications**: Sonner for toast notifications
+- **Icons**: lucide-react
 
-Available packages and libraries:
+## Project Structure
 
-- The lucide-react package is installed for icons.
-- You ALREADY have ALL the shadcn/ui components and their dependencies installed. So you don't need to install them again.
-- You have ALL the necessary Radix UI components installed.
-- Use prebuilt components from the shadcn/ui library after importing them. Note that these files shouldn't be edited, so make new components if you need to change them.
+- `src/pages`: Top-level page components for each route
+- `src/components/ui`: Base UI components from shadcn/ui (do not modify)
+- `src/components/picco`: Custom application-specific components
+- `src/context`: React context providers
+- `src/hooks`: Custom React hooks
+- `src/utils`: Utility functions
+- `src/globals.css`: Global styles and custom dark theme
 
----
+## Key Features Implemented
 
-## Project-Specific Documentation (Picco App)
+### 1. Responsive Design
+- Mobile-first approach with desktop sidebar navigation
+- Collapsible sidebar for desktop (20px collapsed, 256px expanded)
+- Fixed bottom navigation for mobile devices
+- Smooth transitions between mobile and desktop layouts
 
-# Picco Application Documentation
+### 2. Navigation System
+- **Desktop**: Collapsible sidebar with tooltips
+- **Mobile**: Fixed bottom navigation bar (no border, solid background)
+- Active state indicators with green highlighting
+- Smooth hover effects and transitions
 
-This document outlines the features and components of the Picco crypto prediction application.
+### 3. Pages & Routes
 
-## 1. Core Technologies
+#### Home Page (`/`)
+- Animated "Picco" header
+- Market Movers carousel with live crypto data from CoinGecko
+- Today's Hot Prediction card with countdown timer
+- Leaderboard snippet showing top 3 predictors
+- Additional prediction markets feed
 
--   **Framework**: React with TypeScript
--   **Routing**: React Router
--   **Styling**: Tailwind CSS
--   **UI Components**: shadcn/ui
--   **State Management**: React Query for server state (placeholder)
--   **Notifications**: Sonner for toast notifications
+#### Predictions Page (`/predictions`)
+- Search functionality for predictions
+- Filter tabs: All, My Predictions, Following
+- Prediction cards with voting status
+- Vote dialog for casting predictions
+- Real-time consensus percentages
 
-## 2. Project Structure
+#### Leaderboard Page (`/leaderboard`)
+- Global/Weekly/Daily filter tabs
+- Ranked user list with avatars
+- Special styling for top 3 (gold/silver/bronze)
+- Rank change animations (up/down)
+- Follow/Following buttons
 
-The project follows a standard React application structure:
+#### Profile Page (`/profile`)
+- User avatar with verified badge
+- Performance stats (win rate, predictions count)
+- Achievements grid with icons
+- Recent activity feed
+- Referral system with copy functionality
 
--   `src/pages`: Contains the top-level page components for each route.
--   `src/components/ui`: Contains the base UI components from shadcn/ui. These should not be modified directly.
--   `src/components/picco`: Contains all the custom, application-specific components built for Picco.
--   `src/globals.css`: Defines the global styles, including the custom dark theme and color palette.
--   `src/App.tsx`: Defines the application's routes using React Router.
+### 4. Data Sources
+- **Live Data**: CoinGecko API for market movers
+- **Static Data**: Hardcoded predictions, leaderboard, user data
+- **State Management**: React Query for API caching
 
-## 3. Data Handling
+### 5. Visual Design
+- **Dark Theme**: Custom color palette
+  - Background: #0A0A0F
+  - Surface: #121218
+  - Primary Green: #19E6A2 (for positive actions)
+  - Primary Red: #FF4D4D (for negative actions)
+  - Gold/Silver/Bronze for rankings
+- **Glassmorphic effects** on cards
+- **Smooth animations** throughout
+- **Responsive typography**
 
-**Current State**: All data within the application is currently **static and hardcoded**. This includes user lists, prediction markets, and market data. The application serves as a high-fidelity frontend prototype. The integration of a backend API would be the next logical step to make the application dynamic.
+### 6. Interactive Elements
+- Hover effects on all clickable elements
+- Smooth transitions (300ms duration)
+- Toast notifications for user feedback
+- Loading states with skeletons
+- Error handling with user-friendly messages
 
-## 4. Pages & Routes
+### 7. Components Architecture
+- **Modular**: Each component is self-contained
+- **Reusable**: Components used across multiple pages
+- **Consistent**: Unified styling and behavior
+- **Accessible**: Proper ARIA labels and keyboard navigation
 
-The application is structured into the following main pages:
+## Development Guidelines
 
-### 4.1. Home Page (`/`)
+1. **Color Usage**:
+   - Use CSS variables for colors
+   - Primary green for positive actions
+   - Primary red for negative actions
+   - Consistent text hierarchy
 
-This is the main landing page of the application.
+2. **Spacing**:
+   - Use Tailwind spacing scale
+   - Consistent padding/margins (4px increments)
+   - Responsive spacing for mobile/desktop
 
--   **Header**: Displays the application name "Picco" with an animated background.
--   **Market Movers Carousel**: An auto-scrolling, infinitely looping carousel showcasing trending cryptocurrencies, complete with indicator dots.
--   **Today's Hot Prediction**: A prominent card featuring a special daily prediction with a countdown timer and "YES"/"NO" voting buttons.
--   **Prediction List**: A feed of other active prediction markets.
--   **Leaderboard Snippet**: A preview of the top 3 users from the leaderboard, with a button to view the full leaderboard.
--   **Footer Navigation**: A fixed footer providing easy navigation to Home, Predictions, Leaderboard, and Profile pages.
+3. **Animations**:
+   - 300ms duration for transitions
+   - Subtle hover effects
+   - No excessive animations
 
-### 4.2. Predictions Page (`/predictions`)
+4. **Mobile Considerations**:
+   - Fixed navigation at bottom
+   - Touch-friendly tap targets (min 44x44px)
+   - No hover states on mobile
+   - Proper safe area handling
 
-This page displays a comprehensive feed of all prediction markets.
+## Current Limitations
 
--   **Predictions Header**: A sticky header containing a search bar and filter tabs for "All", "My Predictions", and "Following".
--   **Predictions Feed**: A list of `PredictionFeedCard` components. Each card shows:
-    -   The cryptocurrency and its icon.
-    -   The prediction question.
-    -   Time remaining or "Closed" status.
-    -   Community consensus (e.g., "75% Yes").
-    -   The user's current vote, if any.
--   **Voting System**: Users can click "Vote Now" on active predictions, which opens a `VoteDialog`.
--   **Vote Dialog**: A modal where users can cast a "Yes" or "No" vote. The dialog closes automatically after a vote is cast, and a confirmation toast is shown.
+1. **Data**: All data is currently static/hardcoded
+2. **Authentication**: No user auth system
+3. **Backend**: No API integration beyond CoinGecko
+4. **Real-time**: No live updates (would need WebSocket/SSE)
 
-### 4.3. Leaderboard Page (`/leaderboard`)
+## Next Steps for Enhancement
 
-This page ranks users based on their prediction performance.
+1. Add user authentication
+2. Connect to backend API
+3. Add real-time updates
+4. Implement actual prediction system
+5. Add user settings/preferences
+6. Add dark/light theme toggle
+7. Add push notifications
+8. Add social features (following/followers)
 
--   **Leaderboard Header**: A sticky header with filters for "Global", "Weekly", and "Daily" leaderboards.
--   **Leaderboard List**: A ranked list of users, displaying:
-    -   Rank, avatar, and name.
-    -   Stats like total correct predictions and current streak.
-    -   A "Follow" / "Following" button.
--   **Podium Styling**: The top 3 users have special gold, silver, and bronze styling on their cards.
--   **Rank Change Animation**: Users who have moved up or down in the rankings have a subtle animation on their card.
+## File Structure Summary
 
-### 4.4. Profile Page (`/profile`)
-
-This page displays the user's personal information and statistics.
-
--   **Profile Header**: A simple header with a back button.
--   **Profile Info**: Shows the user's avatar, name, handle, and a "Verified" badge.
--   **Profile Stats**: Key performance indicators like "Win Rate" and total "Predictions" made.
--   **Achievements**: A grid showcasing earned badges like "Early Adopter" and "Power User".
--   **Recent Activity**: A list of the user's most recent predictions and their outcomes (Win/Loss).
--   **Referrals**: A section with a unique, copyable referral code to invite friends.
-
-### 4.5. Not Found Page (`*`)
-
-A standard 404 page is shown for any route that does not exist.
-
-## 5. Key Features & Components
-
--   **Responsive Design**: The UI is fully responsive and optimized for mobile devices.
--   **Dark Theme**: The application uses a custom dark theme for a modern, sleek look.
--   **Interactive Elements**: Smooth transitions, hover effects, and animations are used throughout the app to enhance user experience. This includes hover effects on the Profile page for stats, achievements, and recent activity to improve interactivity.
--   **Toast Notifications**: Non-intrusive feedback is provided for actions like voting or copying text.
--   **Reusable Components**: The application is built with a modular component architecture, with most components located in `src/components/picco/`.
-
-## 6. Color Scheme
-
-The application uses a custom color palette defined in `src/globals.css` to achieve its distinct dark theme.
-
--   `--background-dark: #0A0A0F` (Main background color)
--   `--surface-dark: #121218` (Card and surface backgrounds)
--   `--primary-green: #19E6A2` (Primary action color, for "Yes" votes, highlights)
--   `--primary-red: #FF4D4D` (Secondary action color, for "No" votes, negative changes)
--   `--text-primary-light: #FFFFFF` (Primary text color)
--   `--text-secondary-light: #A0AEC0` (Secondary text color for less important information)
--   `--border-color: rgba(255, 255, 255, 0.1)` (Borders and separators)
--   `--gold-color: #FFD700` (For the #1 rank on the leaderboard)
--   `--silver-color: #C0C0C0` (For the #2 rank on the leaderboard)
--   `--bronze-color: #CD7F32` (For the #3 rank on the leaderboard)
+```
+src/
+├── components/
+│   ├── picco/          # Custom components
+│   │   ├── Navigation.tsx
+│   │   ├── Header.tsx
+│   │   ├── MarketMoversCarousel.tsx
+│   │   ├── HotPredictionCard.tsx
+│   │   ├── PredictionFeedCard.tsx
+│   │   ├── VoteDialog.tsx
+│   │   ├── LeaderboardUser.tsx
+│   │   ├── ProfileInfo.tsx
+│   │   └── ... (other components)
+│   └── ui/            # shadcn/ui components (don't modify)
+├── pages/
+│   ├── Index.tsx      # Home page
+│   ├── Predictions.tsx
+│   ├── Leaderboard.tsx
+│   ├── Profile.tsx
+│   └── NotFound.tsx
+├── context/
+│   └── SidebarContext.tsx
+├── hooks/
+│   └── use-toast.ts
+├── utils/
+│   └── toast.ts
+├── globals.css        # Global styles
+└── App.tsx           # Main app component

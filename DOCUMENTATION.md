@@ -1,105 +1,169 @@
 # Picco Application Documentation
 
-This document outlines the features and components of the Picco crypto prediction application.
+## Overview
+Picco is a crypto prediction application that allows users to make predictions on cryptocurrency price movements and compete on leaderboards. The app features a modern dark theme with responsive design for both mobile and desktop.
 
-## 1. Core Technologies
+## Current Features
 
--   **Framework**: React with TypeScript
--   **Routing**: React Router
--   **Styling**: Tailwind CSS
--   **UI Components**: shadcn/ui
--   **State Management**: React Query for server state (placeholder)
--   **Notifications**: Sonner for toast notifications
+### 1. Market Data Integration
+- **Live Market Movers**: Real-time cryptocurrency data from CoinGecko API
+- **Auto-scrolling carousel**: Shows top 15 cryptocurrencies with price changes
+- **Loading states**: Skeleton loaders while data fetches
+- **Error handling**: Graceful error states for API failures
 
-## 2. Project Structure
+### 2. Prediction System
+- **Active Predictions**: Users can vote on crypto price predictions
+- **Vote Dialog**: Modal interface for casting predictions
+- **Consensus Display**: Shows community sentiment percentages
+- **Status Tracking**: Active/Closed/Unpredicted states
+- **Search & Filter**: Find predictions by keyword or filter by type
 
-The project follows a standard React application structure:
+### 3. Leaderboard
+- **Ranked Competition**: Global leaderboard with user rankings
+- **Podium Styling**: Special visual treatment for top 3 positions
+- **Rank Changes**: Animated indicators for rank movements
+- **User Profiles**: Click through to view detailed profiles
+- **Follow System**: Follow/unfollow other predictors
 
--   `src/pages`: Contains the top-level page components for each route.
--   `src/components/ui`: Contains the base UI components from shadcn/ui. These should not be modified directly.
--   `src/components/picco`: Contains all the custom, application-specific components built for Picco.
--   `src/globals.css`: Defines the global styles, including the custom dark theme and color palette.
--   `src/App.tsx`: Defines the application's routes using React Router.
+### 4. User Profile
+- **Personal Stats**: Win rate, total predictions, streaks
+- **Achievements**: Visual badges for accomplishments
+- **Recent Activity**: History of recent predictions
+- **Referral System**: Unique codes for inviting friends
+- **Verified Status**: Badge for verified users
 
-## 3. Data Handling
+### 5. Responsive Design
+- **Mobile**: Bottom navigation bar with 4 main sections
+- **Desktop**: Collapsible sidebar navigation
+- **Tablet**: Optimized layouts for medium screens
+- **Touch-friendly**: Large tap targets for mobile
 
-**Current State**: All data within the application is currently **static and hardcoded**. This includes user lists, prediction markets, and market data. The application serves as a high-fidelity frontend prototype. The integration of a backend API would be the next logical step to make the application dynamic.
+## Technical Implementation
 
-## 4. Pages & Routes
+### State Management
+- **React Query**: For server state and API caching
+- **React Context**: For sidebar collapse state
+- **Local State**: Component-level state for UI interactions
 
-The application is structured into the following main pages:
+### Styling System
+- **Tailwind CSS**: Utility-first styling
+- **CSS Variables**: Consistent color theming
+- **Custom Animations**: Rank changes, hover effects
+- **Glassmorphism**: Modern card styling
 
-### 4.1. Home Page (`/`)
+### Component Architecture
+- **Atomic Design**: Small, reusable components
+- **Consistent Props**: Standardized component interfaces
+- **Error Boundaries**: Graceful error handling
+- **Loading States**: Skeleton screens and spinners
 
-This is the main landing page of the application.
+## API Integration
 
--   **Header**: Displays the application name "Picco" with an animated background.
--   **Market Movers Carousel**: An auto-scrolling, infinitely looping carousel showcasing trending cryptocurrencies, complete with indicator dots.
--   **Today's Hot Prediction**: A prominent card featuring a special daily prediction with a countdown timer and "YES"/"NO" voting buttons.
--   **Prediction List**: A feed of other active prediction markets.
--   **Leaderboard Snippet**: A preview of the top 3 users from the leaderboard, with a button to view the full leaderboard.
--   **Footer Navigation**: A fixed footer providing easy navigation to Home, Predictions, Leaderboard, and Profile pages.
+### CoinGecko API
+- **Endpoint**: `/coins/markets`
+- **Data**: Top 15 cryptocurrencies by market cap
+- **Refresh**: 5-minute cache
+- **Fields**: Price, 24h change, market cap, volume
 
-### 4.2. Predictions Page (`/predictions`)
+### Future API Endpoints Needed
+- **Predictions**: Create, read, update predictions
+- **Users**: Authentication, profiles, stats
+- **Leaderboard**: Real-time rankings
+- **Votes**: Cast and retrieve votes
+- **Achievements**: Unlock and display badges
 
-This page displays a comprehensive feed of all prediction markets.
+## User Experience Features
 
--   **Predictions Header**: A sticky header containing a search bar and filter tabs for "All", "My Predictions", and "Following".
--   **Predictions Feed**: A list of `PredictionFeedCard` components. Each card shows:
-    -   The cryptocurrency and its icon.
-    -   The prediction question.
-    -   Time remaining or "Closed" status.
-    -   Community consensus (e.g., "75% Yes").
-    -   The user's current vote, if any.
--   **Voting System**: Users can click "Vote Now" on active predictions, which opens a `VoteDialog`.
--   **Vote Dialog**: A modal where users can cast a "Yes" or "No" vote. The dialog closes automatically after a vote is cast, and a confirmation toast is shown.
+### Navigation
+- **Persistent Navigation**: Always accessible
+- **Visual Feedback**: Active states and hover effects
+- **Smooth Transitions**: 300ms duration animations
+- **Keyboard Navigation**: Tab order and focus states
 
-### 4.3. Leaderboard Page (`/leaderboard`)
+### Feedback System
+- **Toast Notifications**: Success/error messages
+- **Loading Indicators**: Skeleton screens
+- **Empty States**: Helpful messages when no data
+- **Error Messages**: User-friendly error handling
 
-This page ranks users based on their prediction performance.
+### Performance
+- **Code Splitting**: Route-based code splitting
+- **Image Optimization**: Optimized crypto icons
+- **Caching**: React Query for API responses
+- **Lazy Loading**: Components loaded on demand
 
--   **Leaderboard Header**: A sticky header with filters for "Global", "Weekly", and "Daily" leaderboards.
--   **Leaderboard List**: A ranked list of users, displaying:
-    -   Rank, avatar, and name.
-    -   Stats like total correct predictions and current streak.
-    -   A "Follow" / "Following" button.
--   **Podium Styling**: The top 3 users have special gold, silver, and bronze styling on their cards.
--   **Rank Change Animation**: Users who have moved up or down in the rankings have a subtle animation on their card.
+## Color Palette
 
-### 4.4. Profile Page (`/profile`)
+### Primary Colors
+- **Background**: #0A0A0F (deep dark)
+- **Surface**: #121218 (card backgrounds)
+- **Primary Green**: #19E6A2 (positive actions)
+- **Primary Red**: #FF4D4D (negative actions)
 
-This page displays the user's personal information and statistics.
+### Text Colors
+- **Primary**: #FFFFFF (main text)
+- **Secondary**: #A0AEC0 (supporting text)
+- **Muted**: rgba(255,255,255,0.6) (disabled text)
 
--   **Profile Header**: A simple header with a back button.
--   **Profile Info**: Shows the user's avatar, name, handle, and a "Verified" badge.
--   **Profile Stats**: Key performance indicators like "Win Rate" and total "Predictions" made.
--   **Achievements**: A grid showcasing earned badges like "Early Adopter" and "Power User".
--   **Recent Activity**: A list of the user's most recent predictions and their outcomes (Win/Loss).
--   **Referrals**: A section with a unique, copyable referral code to invite friends.
+### Accent Colors
+- **Gold**: #FFD700 (1st place)
+- **Silver**: #C0C0C0 (2nd place)
+- **Bronze**: #CD7F32 (3rd place)
 
-### 4.5. Not Found Page (`*`)
+## Mobile vs Desktop Differences
 
-A standard 404 page is shown for any route that does not exist.
+### Mobile (≤768px)
+- **Bottom Navigation**: Fixed at bottom
+- **Stacked Layout**: Single column
+- **Touch Targets**: 44x44px minimum
+- **Swipe Gestures**: Carousel swiping
 
-## 5. Key Features & Components
+### Desktop (>768px)
+- **Sidebar Navigation**: Left-side collapsible
+- **Grid Layout**: Multi-column where appropriate
+- **Hover States**: Enhanced interactivity
+- **Keyboard Shortcuts**: Arrow key navigation
 
--   **Responsive Design**: The UI is fully responsive and optimized for mobile devices.
--   **Dark Theme**: The application uses a custom dark theme for a modern, sleek look.
--   **Interactive Elements**: Smooth transitions, hover effects, and animations are used throughout the app to enhance user experience. This includes hover effects on the Profile page for stats, achievements, and recent activity to improve interactivity.
--   **Toast Notifications**: Non-intrusive feedback is provided for actions like voting or copying text.
--   **Reusable Components**: The application is built with a modular component architecture, with most components located in `src/components/picco/`.
+## Browser Support
+- **Modern Browsers**: Chrome, Firefox, Safari, Edge
+- **Mobile Browsers**: iOS Safari, Chrome Mobile
+- **Progressive Enhancement**: Graceful degradation
+- **Feature Detection**: Modern CSS features
 
-## 6. Color Scheme
+## Development Setup
+1. Install dependencies: `npm install`
+2. Start dev server: `npm run dev`
+3. Build for production: `npm run build`
+4. Preview build: `npm run preview`
 
-The application uses a custom color palette defined in `src/globals.css` to achieve its distinct dark theme.
+## Deployment
+- **Static Hosting**: Vercel, Netlify, GitHub Pages
+- **Environment Variables**: API keys for CoinGecko
+- **Build Optimization**: Tree-shaking, minification
+- **CDN**: Asset optimization
 
--   `--background-dark: #0A0A0F` (Main background color)
--   `--surface-dark: #121218` (Card and surface backgrounds)
--   `--primary-green: #19E6A2` (Primary action color, for "Yes" votes, highlights)
--   `--primary-red: #FF4D4D` (Secondary action color, for "No" votes, negative changes)
--   `--text-primary-light: #FFFFFF` (Primary text color)
--   `--text-secondary-light: #A0AEC0` (Secondary text color for less important information)
--   `--border-color: rgba(255, 255, 255, 0.1)` (Borders and separators)
--   `--gold-color: #FFD700` (For the #1 rank on the leaderboard)
--   `--silver-color: #C0C0C0` (For the #2 rank on the leaderboard)
--   `--bronze-color: #CD7F32` (For the #3 rank on the leaderboard)
+## Future Roadmap
+
+### Phase 1: Core Features
+- [ ] User authentication
+- [ ] Real prediction system
+- [ ] Live leaderboard updates
+- [ ] User settings
+
+### Phase 2: Social Features
+- [ ] User profiles
+- [ ] Following system
+- [ ] Comments on predictions
+- [ ] Share predictions
+
+### Phase 3: Advanced Features
+- [ ] Push notifications
+- [ ] Price alerts
+- [ ] Advanced analytics
+- [ ] Premium features
+
+### Phase 4: Platform Expansion
+- [ ] Web3 integration
+- [ ] Token rewards
+- [ ] NFT achievements
+- [ ] Mobile app
