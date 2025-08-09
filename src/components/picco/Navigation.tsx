@@ -61,7 +61,7 @@ export const Navigation = () => {
       </aside>
 
       {/* Mobile Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 z-20 flex h-20 flex-row justify-around border-t border-[var(--border-color)] bg-[var(--background-dark)]/80 backdrop-blur-sm md:hidden">
+      <footer className="fixed bottom-0 left-0 right-0 z-20 flex h-20 flex-row justify-around border-t border-[var(--border-color)] bg-[var(--background-dark)] md:hidden">
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
           const Icon = item.icon;
