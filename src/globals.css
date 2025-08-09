@@ -96,7 +96,7 @@
   html {
     font-size: 15px;
     background-color: var(--background-dark);
-    overscroll-behavior: none;
+    overscroll-behavior-y: contain;
   }
 
   body {
@@ -104,7 +104,7 @@
     font-family: 'Space Grotesk', sans-serif;
     min-height: 100dvh;
     background-color: var(--background-dark);
-    overscroll-behavior: none;
+    overscroll-behavior-y: contain;
   }
 }
 
