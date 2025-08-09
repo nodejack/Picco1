@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import Autoplay from "embla-carousel-autoplay";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  type CarouselApi,
-} from "@/components/ui/carousel";
 import { MarketMoverCard } from './MarketMoverCard';
 import { MarketMoverCardSkeleton } from './MarketMoverCardSkeleton';
 import { AlertCircle } from 'lucide-react';
@@ -37,90 +30,157 @@ export const MarketMoversCarousel = () => {
     staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
   });
 
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const plugin = useRef(
-    Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: true })
-  );
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (!marketMovers || marketMovers.length === 0) return;
+
+    const interval = setInterval(() => {
+      if (scrollContainerRef.current) {
+        const container = scrollContainerRef.current;
+        const cardWidth = container.children[0]?.clientWidth || 280;
+        const gap = 16; // 1rem gap
+        const scrollAmount = cardWidth + gap;
+        
+        if (currentIndex >= marketMovers.length - 1) {
+          // Reset to beginning
+          container.scrollTo({ left: 0, behavior: 'smooth' });
+          setCurrentIndex(0);
+        } else {
+          // Scroll to next
+          const nextScrollLeft = (currentIndex + 1) * scrollAmount;
+          container.scrollTo({ left: nextScrollLeft, behavior: 'smooth' });
+          setCurrentIndex(currentIndex + 1);
+        }
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex, marketMovers]);
+
+  // Update scroll buttons state
+  const updateScrollButtons = () => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      setCanScrollLeft(container.scrollLeft > 0);
+      setCanScrollRight(
+        container.scrollLeft < container.scrollWidth - container.clientWidth - 1
+      );
+    }
+  };
 
   useEffect(() => {
-    if (!api) {
-      return;
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', updateScrollButtons);
+      updateScrollButtons(); // Initial check
+      
+      return () => container.removeEventListener('scroll', updateScrollButtons);
     }
+  }, [marketMovers]);
 
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap());
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      const cardWidth = 280;
+      const gap = 16;
+      scrollContainerRef.current.scrollBy({ 
+        left: -(cardWidth + gap), 
+        behavior: 'smooth' 
+      });
+    }
+  };
 
-    const onSelect = () => {
-      setCurrent(api.selectedScrollSnap());
-    };
-
-    api.on("select", onSelect);
-
-    return () => {
-      api.off("select", onSelect);
-    };
-  }, [api]);
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      const cardWidth = 280;
+      const gap = 16;
+      scrollContainerRef.current.scrollBy({ 
+        left: cardWidth + gap, 
+        behavior: 'smooth' 
+      });
+    }
+  };
 
   return (
     <section className="pt-4">
       <div className="px-4">
         <h2 className="text-2xl font-bold mb-4">Market Movers</h2>
       </div>
-      <div className="w-full overflow-hidden">
-        <Carousel
-          setApi={setApi}
-          plugins={[plugin.current]}
-          opts={{
-            align: "start",
-            loop: true,
-            slidesToScroll: 1,
-            containScroll: "trimSnaps",
+      
+      <div className="relative">
+        {/* Scroll container */}
+        <div 
+          ref={scrollContainerRef}
+          className="flex gap-4 overflow-x-auto scrollbar-hide px-4 pb-2"
+          style={{
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
           }}
-          className="w-full"
         >
-          <CarouselContent className="-ml-1 pl-4">
-            {isLoading && (
-              Array.from({ length: 5 }).map((_, index) => (
-                <CarouselItem key={index} className="pl-1 basis-[calc(100vw-120px)] min-[480px]:basis-[280px] sm:basis-[300px] md:basis-1/3 lg:basis-1/4">
-                  <MarketMoverCardSkeleton />
-                </CarouselItem>
-              ))
-            )}
-            {isError && (
-              <CarouselItem className="pl-1 basis-full">
-                <div className="bg-red-900/50 text-red-400 p-4 rounded-lg flex items-center gap-2 mr-4">
-                  <AlertCircle size={20} />
-                  <span>Error fetching market data.</span>
-                </div>
-              </CarouselItem>
-            )}
-            {marketMovers?.map((mover) => (
-              <CarouselItem key={mover.id} className="pl-1 basis-[calc(100vw-120px)] min-[480px]:basis-[280px] sm:basis-[300px] md:basis-1/3 lg:basis-1/4">
-                <MarketMoverCard
-                  icon={mover.image}
-                  ticker={mover.symbol.toUpperCase()}
-                  price={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(mover.current_price)}
-                  change={mover.price_change_percentage_24h}
-                />
-              </CarouselItem>
+          {isLoading && (
+            Array.from({ length: 5 }).map((_, index) => (
+              <div 
+                key={index} 
+                className="flex-shrink-0 w-[280px]"
+                style={{ scrollSnapAlign: 'start' }}
+              >
+                <MarketMoverCardSkeleton />
+              </div>
+            ))
+          )}
+          
+          {isError && (
+            <div className="flex-shrink-0 w-full">
+              <div className="bg-red-900/50 text-red-400 p-4 rounded-lg flex items-center gap-2">
+                <AlertCircle size={20} />
+                <span>Error fetching market data.</span>
+              </div>
+            </div>
+          )}
+          
+          {marketMovers?.map((mover) => (
+            <div 
+              key={mover.id} 
+              className="flex-shrink-0 w-[280px]"
+              style={{ scrollSnapAlign: 'start' }}
+            >
+              <MarketMoverCard
+                icon={mover.image}
+                ticker={mover.symbol.toUpperCase()}
+                price={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(mover.current_price)}
+                change={mover.price_change_percentage_24h}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Navigation dots */}
+        {marketMovers && marketMovers.length > 0 && (
+          <div className="flex justify-center gap-2 mt-4 px-4">
+            {Array.from({ length: Math.min(marketMovers.length, 8) }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  if (scrollContainerRef.current) {
+                    const cardWidth = 280;
+                    const gap = 16;
+                    const scrollLeft = index * (cardWidth + gap);
+                    scrollContainerRef.current.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                    setCurrentIndex(index);
+                  }
+                }}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex ? 'w-4 bg-[var(--primary-green)]' : 'w-2 bg-zinc-600'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
             ))}
-          </CarouselContent>
-        </Carousel>
-      </div>
-      <div className="flex justify-center gap-2 mt-4">
-        {Array.from({ length: count }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => api?.scrollTo(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              index === current ? 'w-4 bg-[var(--primary-green)]' : 'w-2 bg-zinc-600'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
+          </div>
+        )}
       </div>
     </section>
   );
