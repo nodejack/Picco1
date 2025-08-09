@@ -33,7 +33,6 @@ const fetchMarketMovers = async (): Promise<Coin[]> => {
 export const MarketMoversCarousel = () => {
   const { data: marketMovers, isLoading, isError } = useQuery<Coin[]>({
     queryKey: ['marketMovers'],
-    queryKeyHash: 'marketMovers',
     queryFn: fetchMarketMovers,
     staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
   });
@@ -74,21 +73,22 @@ export const MarketMoversCarousel = () => {
         opts={{
           align: "start",
           loop: true,
+          slidesToScroll: 1,
         }}
-        className="w-full"
+        className="w-full max-w-full overflow-hidden"
       >
-        <CarouselContent className="-ml-2">
+        <CarouselContent className="-ml-3 md:-ml-4">
           {isLoading && (
             Array.from({ length: 5 }).map((_, index) => (
-              <CarouselItem key={index} className="pl-2 basis-4/5 sm:basis-1/2 md:basis-1/3">
-                <div className="p-1">
+              <CarouselItem key={index} className="pl-3 md:pl-4 basis-[280px] sm:basis-[300px] md:basis-1/3 lg:basis-1/4 flex-shrink-0">
+                <div className="h-full">
                   <MarketMoverCardSkeleton />
                 </div>
               </CarouselItem>
             ))
           )}
           {isError && (
-            <CarouselItem className="w-full">
+            <CarouselItem className="pl-3 md:pl-4 basis-full">
               <div className="bg-red-900/50 text-red-400 p-4 rounded-lg flex items-center gap-2">
                 <AlertCircle size={20} />
                 <span>Error fetching market data.</span>
@@ -96,8 +96,8 @@ export const MarketMoversCarousel = () => {
             </CarouselItem>
           )}
           {marketMovers?.map((mover) => (
-            <CarouselItem key={mover.id} className="pl-2 basis-4/5 sm:basis-1/2 md:basis-1/3">
-              <div className="p-1">
+            <CarouselItem key={mover.id} className="pl-3 md:pl-4 basis-[280px] sm:basis-[300px] md:basis-1/3 lg:basis-1/4 flex-shrink-0">
+              <div className="h-full">
                 <MarketMoverCard
                   icon={mover.image}
                   ticker={mover.symbol.toUpperCase()}
