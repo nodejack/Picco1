@@ -65,50 +65,51 @@ export const MarketMoversCarousel = () => {
   }, [api]);
 
   return (
-    <section className="px-4 pt-4">
-      <h2 className="text-2xl font-bold mb-4">Market Movers</h2>
-      <Carousel
-        setApi={setApi}
-        plugins={[plugin.current]}
-        opts={{
-          align: "start",
-          loop: true,
-          slidesToScroll: 1,
-        }}
-        className="w-full max-w-full overflow-hidden"
-      >
-        <CarouselContent className="-ml-3 md:-ml-4">
-          {isLoading && (
-            Array.from({ length: 5 }).map((_, index) => (
-              <CarouselItem key={index} className="pl-3 md:pl-4 basis-[280px] sm:basis-[300px] md:basis-1/3 lg:basis-1/4 flex-shrink-0">
-                <div className="h-full">
+    <section className="pt-4">
+      <div className="px-4">
+        <h2 className="text-2xl font-bold mb-4">Market Movers</h2>
+      </div>
+      <div className="w-full overflow-hidden">
+        <Carousel
+          setApi={setApi}
+          plugins={[plugin.current]}
+          opts={{
+            align: "start",
+            loop: true,
+            slidesToScroll: 1,
+            containScroll: "trimSnaps",
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-1 pl-4">
+            {isLoading && (
+              Array.from({ length: 5 }).map((_, index) => (
+                <CarouselItem key={index} className="pl-1 basis-[calc(100vw-120px)] min-[480px]:basis-[280px] sm:basis-[300px] md:basis-1/3 lg:basis-1/4">
                   <MarketMoverCardSkeleton />
+                </CarouselItem>
+              ))
+            )}
+            {isError && (
+              <CarouselItem className="pl-1 basis-full">
+                <div className="bg-red-900/50 text-red-400 p-4 rounded-lg flex items-center gap-2 mr-4">
+                  <AlertCircle size={20} />
+                  <span>Error fetching market data.</span>
                 </div>
               </CarouselItem>
-            ))
-          )}
-          {isError && (
-            <CarouselItem className="pl-3 md:pl-4 basis-full">
-              <div className="bg-red-900/50 text-red-400 p-4 rounded-lg flex items-center gap-2">
-                <AlertCircle size={20} />
-                <span>Error fetching market data.</span>
-              </div>
-            </CarouselItem>
-          )}
-          {marketMovers?.map((mover) => (
-            <CarouselItem key={mover.id} className="pl-3 md:pl-4 basis-[280px] sm:basis-[300px] md:basis-1/3 lg:basis-1/4 flex-shrink-0">
-              <div className="h-full">
+            )}
+            {marketMovers?.map((mover) => (
+              <CarouselItem key={mover.id} className="pl-1 basis-[calc(100vw-120px)] min-[480px]:basis-[280px] sm:basis-[300px] md:basis-1/3 lg:basis-1/4">
                 <MarketMoverCard
                   icon={mover.image}
                   ticker={mover.symbol.toUpperCase()}
                   price={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(mover.current_price)}
                   change={mover.price_change_percentage_24h}
                 />
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
       <div className="flex justify-center gap-2 mt-4">
         {Array.from({ length: count }).map((_, index) => (
           <button
