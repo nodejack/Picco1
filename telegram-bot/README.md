@@ -33,9 +33,6 @@ A Telegram bot that provides quick access to the Picco crypto prediction app, si
 
 ```bash
 # Install bot dependencies
-npm install
-
-# Or if you prefer pnpm
 pnpm install
 ```
 
@@ -43,10 +40,10 @@ pnpm install
 
 ```bash
 # Development mode (with auto-restart)
-npm run dev
+pnpm run dev
 
 # Production mode
-npm start
+pnpm start
 ```
 
 ## Bot Commands
@@ -58,17 +55,29 @@ npm start
 
 ## Deployment Options
 
-### Option 1: Local Server
-- Run on your local machine
-- Good for development and testing
+### Option 1: Render (Recommended)
+- Free tier with 750 hours/month
+- Easy GitHub integration
+- Automatic deployments
+- Built-in SSL and monitoring
 
-### Option 2: Railway/Render
-- Deploy to Railway or Render for 24/7 uptime
-- Free tier available
+### Option 2: Heroku
+- Reliable paid hosting ($7/month)
+- Excellent tooling and add-ons
+- Industry standard for Node.js apps
+- Great for production use
 
-### Option 3: VPS
-- Deploy to a VPS for full control
-- More reliable for production
+### Option 3: DigitalOcean App Platform
+- $5/month for apps
+- Simple interface
+- Good performance
+- GitHub integration
+
+### Option 4: VPS (Advanced)
+- Deploy to any VPS (DigitalOcean, Linode, etc.)
+- Full control over environment
+- Requires server management skills
+- Most cost-effective for high usage
 
 ## Bot Features
 

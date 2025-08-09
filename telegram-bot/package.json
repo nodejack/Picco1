@@ -5,8 +5,10 @@
   "main": "telegram-bot.js",
   "scripts": {
     "start": "node telegram-bot.js",
-    "dev": "nodemon telegram-bot.js"
+    "dev": "nodemon telegram-bot.js",
+    "build": "echo 'No build step required for Node.js bot'"
   },
+  "packageManager": "pnpm@9.0.0",
   "dependencies": {
     "node-telegram-bot-api": "^0.64.0",
     "dotenv": "^16.3.1"
