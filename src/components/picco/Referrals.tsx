@@ -1,19 +1,54 @@
 import React from 'react';
-import { Copy } from 'lucide-react';
+import { Copy, Share } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { useTelegram } from '@/context/TelegramContext';
 
 export const Referrals = () => {
   const { toast } = useToast();
-  const referralCode = 'PICCO-X42';
+  const { user, isTelegramWebApp, showAlert } = useTelegram();
+  
+  // Generate personalized referral code based on Telegram user ID
+  const generateReferralCode = () => {
+    if (user?.id) {
+      // Create a simple hash from user ID for referral code
+      const hash = user.id.toString(36).toUpperCase().slice(-3);
+      return `PICCO-${hash}${user.first_name.slice(0, 2).toUpperCase()}`;
+    }
+    return 'PICCO-X42'; // Fallback for non-Telegram users
+  };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(referralCode);
-    toast({
-      title: "Copied to clipboard!",
-      description: "Your referral code has been copied.",
-    });
+  const referralCode = generateReferralCode();
+  const referralUrl = `https://t.me/your_bot_username?start=${referralCode}`;
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(referralCode);
+      if (isTelegramWebApp) {
+        showAlert("Referral code copied! 📋");
+      } else {
+        toast({
+          title: "Copied to clipboard!",
+          description: "Your referral code has been copied.",
+        });
+      }
+    } catch (error) {
+      console.error('Failed to copy:', error);
+    }
+  };
+
+  const shareReferral = () => {
+    if (isTelegramWebApp && user) {
+      const shareText = `🎯 Join me on Picco - the crypto prediction platform!\n\nUse my referral code: ${referralCode}\n\nStart predicting and compete on the leaderboard! 🚀`;
+      
+      // In a real implementation, you'd use Telegram's share functionality
+      // For now, we'll copy the share text
+      navigator.clipboard.writeText(shareText);
+      showAlert("Share message copied! Paste it in any chat 📤");
+    } else {
+      copyToClipboard();
+    }
   };
 
   return (
@@ -38,8 +73,12 @@ export const Referrals = () => {
           <Copy className="h-4 w-4" />
         </Button>
       </div>
-      <Button className="mt-3 w-full rounded-md bg-[var(--primary-green)] py-2 text-sm font-bold text-[var(--background-dark)] transition-transform active:scale-95 h-auto hover:bg-emerald-500">
-        Invite Friends
+      <Button 
+        onClick={shareReferral}
+        className="mt-3 w-full rounded-md bg-[var(--primary-green)] py-2 text-sm font-bold text-[var(--background-dark)] transition-transform active:scale-95 h-auto hover:bg-emerald-500 flex items-center justify-center gap-2"
+      >
+        <Share size={16} />
+        {isTelegramWebApp ? 'Share with Friends' : 'Invite Friends'}
       </Button>
     </section>
   );
