@@ -1,7 +1,7 @@
 # Picco Application Documentation
 
 ## Overview
-Picco is a crypto prediction application that allows users to make predictions on cryptocurrency price movements and compete on leaderboards. The app features a modern dark theme with responsive design for both mobile and desktop.
+Picco is a crypto prediction application that allows users to make predictions on cryptocurrency price movements and compete on leaderboards. The app features a modern dark theme with responsive design for both mobile and desktop, plus native Telegram Mini App integration for seamless in-app experience.
 
 ## Current Features
 
@@ -33,10 +33,19 @@ Picco is a crypto prediction application that allows users to make predictions o
 - **Verified Status**: Badge for verified users
 
 ### 5. Responsive Design
-- **Mobile**: Bottom navigation bar with 4 main sections
+- **Mobile**: Enhanced bottom navigation bar (96px height) optimized for Telegram WebApp
 - **Desktop**: Collapsible sidebar navigation
 - **Tablet**: Optimized layouts for medium screens
-- **Touch-friendly**: Large tap targets for mobile
+- **Touch-friendly**: Large tap targets (44px+ minimum) with proper safe area handling
+- **Telegram Integration**: Native Mini App experience with seamless in-app navigation
+
+### 6. Telegram Mini App Integration
+- **Native Bot Integration**: Telegram bot with Mini App buttons (not external links)
+- **Web App Buttons**: Uses `web_app` parameter for native Telegram experience
+- **Bot Commands**: `/start`, `/help`, `/leaderboard`, `/predictions` with inline buttons
+- **Seamless Launch**: Opens directly in Telegram without browser prompts
+- **Mobile Optimized**: Enhanced navigation specifically for Telegram's mobile environment
+- **HTTP Health Checks**: Simple server for deployment platform requirements
 
 ## Technical Implementation
 
@@ -137,10 +146,45 @@ Picco is a crypto prediction application that allows users to make predictions o
 4. Preview build: `npm run preview`
 
 ## Deployment
+
+### Frontend (React App)
 - **Static Hosting**: Vercel, Netlify, GitHub Pages
 - **Environment Variables**: API keys for CoinGecko
 - **Build Optimization**: Tree-shaking, minification
 - **CDN**: Asset optimization
+
+### Telegram Bot
+- **Hosting**: Render (recommended), Heroku, DigitalOcean App Platform
+- **Package Manager**: pnpm for consistency with main project
+- **Environment Variables**: 
+  - `TELEGRAM_BOT_TOKEN`: Bot token from @BotFather
+  - `APP_URL`: Frontend deployment URL (Netlify/Vercel)
+- **Health Checks**: HTTP server on assigned port for platform requirements
+- **Auto-Deploy**: GitHub integration for continuous deployment
+
+## Telegram Bot Architecture
+
+### Bot Features
+- **Command Handlers**: `/start`, `/help`, `/leaderboard`, `/predictions`
+- **Mini App Integration**: Native `web_app` buttons instead of external links
+- **User Experience**: Seamless in-app navigation without browser prompts
+- **Error Handling**: Comprehensive error logging and graceful failures
+- **Health Monitoring**: HTTP endpoints for deployment platform health checks
+
+### Bot Commands
+```
+/start - Welcome message with Mini App launch buttons
+/help - Show available commands and tips
+/leaderboard - Quick access to leaderboard with Mini App button
+/predictions - Direct access to predictions with Mini App button
+```
+
+### Technical Stack
+- **Runtime**: Node.js 18+
+- **Library**: node-telegram-bot-api
+- **Environment**: dotenv for configuration
+- **HTTP Server**: Built-in Node.js HTTP module for health checks
+- **Polling**: Telegram long polling for real-time message handling
 
 ## Future Roadmap
 

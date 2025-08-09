@@ -28,8 +28,10 @@
 
 ### 2. Navigation System
 - **Desktop**: Collapsible sidebar with tooltips
-- **Mobile**: Fixed bottom navigation bar (no border, solid background)
+- **Mobile**: Enhanced fixed bottom navigation bar (96px height, optimized for Telegram WebApp)
+- **Telegram Integration**: Native Mini App buttons for seamless in-app experience
 - Active state indicators with green highlighting
+- Touch-optimized targets (44px+ minimum) with proper safe area handling
 - Smooth hover effects and transitions
 
 ### 3. Pages & Routes
@@ -115,51 +117,69 @@
    - No hover states on mobile
    - Proper safe area handling
 
+### 8. Telegram Mini App Integration
+- **Native Bot**: Telegram bot with Mini App buttons (not external links)
+- **Seamless Launch**: Opens directly in Telegram without browser prompts
+- **Bot Commands**: `/start`, `/help`, `/leaderboard`, `/predictions`
+- **Enhanced Mobile**: 96px navigation bar optimized for Telegram WebApp
+- **Touch Optimization**: 44px+ minimum touch targets with safe area handling
+- **Deployment**: Bot hosted on Render with HTTP health checks
+
 ## Current Limitations
 
 1. **Data**: All data is currently static/hardcoded
-2. **Authentication**: No user auth system
+2. **Authentication**: No user auth system (could integrate Telegram user data)
 3. **Backend**: No API integration beyond CoinGecko
 4. **Real-time**: No live updates (would need WebSocket/SSE)
+5. **Telegram SDK**: Basic Mini App integration (could enhance with @twa-dev/sdk)
 
 ## Next Steps for Enhancement
 
-1. Add user authentication
-2. Connect to backend API
-3. Add real-time updates
-4. Implement actual prediction system
-5. Add user settings/preferences
-6. Add dark/light theme toggle
-7. Add push notifications
-8. Add social features (following/followers)
+1. **Telegram SDK Integration**: Add @twa-dev/sdk for native Telegram features
+2. **User Authentication**: Integrate Telegram user data for seamless login
+3. **Backend API**: Connect to real prediction and user management system
+4. **Real-time Updates**: Add WebSocket/SSE for live predictions and leaderboard
+5. **Enhanced Bot Features**: Add more interactive bot commands and features
+6. **Push Notifications**: Telegram notifications for prediction results
+7. **Social Features**: Following/followers system with Telegram integration
+8. **Advanced Analytics**: User performance tracking and insights
 
 ## File Structure Summary
 
 ```
-src/
-├── components/
-│   ├── picco/          # Custom components
-│   │   ├── Navigation.tsx
-│   │   ├── Header.tsx
-│   │   ├── MarketMoversCarousel.tsx
-│   │   ├── HotPredictionCard.tsx
-│   │   ├── PredictionFeedCard.tsx
-│   │   ├── VoteDialog.tsx
-│   │   ├── LeaderboardUser.tsx
-│   │   ├── ProfileInfo.tsx
-│   │   └── ... (other components)
-│   └── ui/            # shadcn/ui components (don't modify)
-├── pages/
-│   ├── Index.tsx      # Home page
-│   ├── Predictions.tsx
-│   ├── Leaderboard.tsx
-│   ├── Profile.tsx
-│   └── NotFound.tsx
-├── context/
-│   └── SidebarContext.tsx
-├── hooks/
-│   └── use-toast.ts
-├── utils/
-│   └── toast.ts
-├── globals.css        # Global styles
-└── App.tsx           # Main app component
+├── src/                    # React frontend application
+│   ├── components/
+│   │   ├── picco/          # Custom components
+│   │   │   ├── Navigation.tsx (enhanced for Telegram WebApp)
+│   │   │   ├── Header.tsx
+│   │   │   ├── MarketMoversCarousel.tsx
+│   │   │   ├── HotPredictionCard.tsx
+│   │   │   ├── PredictionFeedCard.tsx
+│   │   │   ├── VoteDialog.tsx
+│   │   │   ├── LeaderboardUser.tsx
+│   │   │   ├── ProfileInfo.tsx
+│   │   │   └── ... (other components)
+│   │   └── ui/            # shadcn/ui components (don't modify)
+│   ├── pages/
+│   │   ├── Index.tsx      # Home page (updated mobile padding)
+│   │   ├── Predictions.tsx (updated mobile padding)
+│   │   ├── Leaderboard.tsx (updated mobile padding)
+│   │   ├── Profile.tsx    # (updated mobile padding)
+│   │   └── NotFound.tsx
+│   ├── context/
+│   │   └── SidebarContext.tsx
+│   ├── hooks/
+│   │   └── use-toast.ts
+│   ├── utils/
+│   │   └── toast.ts
+│   ├── globals.css        # Global styles
+│   └── App.tsx           # Main app component
+├── telegram-bot/           # Telegram Mini App bot
+│   ├── telegram-bot.js    # Main bot logic with Mini App integration
+│   ├── package.json       # Bot dependencies (pnpm)
+│   ├── .env.example       # Environment variables template
+│   ├── .env               # Bot configuration (not in git)
+│   ├── DEPLOYMENT.md      # Render deployment guide
+│   └── README.md          # Bot setup instructions
+├── package.json           # Main project dependencies
+└── ... (other config files)

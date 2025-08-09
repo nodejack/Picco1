@@ -139,12 +139,92 @@ bot.onText(/\/predictions/, async (msg) => {
   );
 });
 
+// Handle any text message (auto-trigger welcome for new users)
+bot.on("message", async (msg) => {
+  const chatId = msg.chat.id;
+  const messageText = msg.text;
+
+  // Skip if it's a command (already handled by onText handlers)
+  if (messageText && messageText.startsWith("/")) {
+    return;
+  }
+
+  // For any other message, send the welcome message with buttons
+  const username = msg.from.first_name;
+
+  const welcomeMessage = `👋 Hey ${username}! Welcome to *Picco*!
+
+🎯 *Crypto Prediction Platform*
+
+Ready to start predicting crypto prices and compete on the leaderboard?
+
+Tap the button below to launch the app! 🚀`;
+
+  const keyboard = {
+    inline_keyboard: [
+      [
+        {
+          text: "🚀 Launch Picco",
+          web_app: {
+            url: APP_URL,
+          },
+        },
+      ],
+      [
+        {
+          text: "📊 Leaderboard",
+          web_app: {
+            url: `${APP_URL}/leaderboard`,
+          },
+        },
+        {
+          text: "🎯 Predictions",
+          web_app: {
+            url: `${APP_URL}/predictions`,
+          },
+        },
+      ],
+      [
+        {
+          text: "ℹ️ Help",
+          callback_data: "show_help",
+        },
+      ],
+    ],
+  };
+
+  await bot.sendMessage(chatId, welcomeMessage, {
+    parse_mode: "Markdown",
+    reply_markup: keyboard,
+  });
+});
+
 // Handle callback queries (button clicks)
 bot.on("callback_query", async (callbackQuery) => {
   const data = callbackQuery.data;
   const chatId = callbackQuery.message.chat.id;
 
   switch (data) {
+    case "show_help":
+      const helpMessage = `🤖 *Picco Bot Commands*
+
+/start - Launch the Picco app
+/help - Show this help message
+/leaderboard - View current leaderboard
+/predictions - Make new predictions
+
+💡 *Tips:*
+• Use the inline buttons for quick access
+• The app works best on mobile devices
+• Join our community for updates!
+
+🚀 Ready to start? Tap any button above!`;
+
+      await bot.answerCallbackQuery(callbackQuery.id);
+      await bot.sendMessage(chatId, helpMessage, {
+        parse_mode: "Markdown",
+      });
+      break;
     case "launch_app":
       await bot.answerCallbackQuery(callbackQuery.id, {
         url: APP_URL,
