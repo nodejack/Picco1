@@ -16,7 +16,7 @@ const navigationItems = [
 
 export function Navigation() {
   const location = useLocation();
-  const { isOpen, toggleSidebar } = useSidebar();
+  const { isCollapsed, setIsCollapsed } = useSidebar();
   const [isTelegramWebApp, setIsTelegramWebApp] = useState(false);
 
   useEffect(() => {
@@ -29,14 +29,14 @@ export function Navigation() {
       <aside
         className={cn(
           "hidden md:flex flex-col fixed left-0 top-0 h-full bg-[var(--surface)] border-r border-[var(--border-color)] transition-all duration-300 z-30",
-          isOpen ? "w-64" : "w-20"
+          isCollapsed ? "w-20" : "w-64"
         )}
       >
         <div className="flex-1 py-4">
           <div className="px-3 py-2">
             <h1 className={cn(
               "text-xl font-bold text-[var(--text-primary)] transition-all duration-300",
-              isOpen ? "opacity-100" : "opacity-0"
+              isCollapsed ? "opacity-0" : "opacity-100"
             )}>
               Picco
             </h1>
@@ -60,7 +60,7 @@ export function Navigation() {
                         <item.icon className="h-5 w-5 flex-shrink-0" />
                         <span className={cn(
                           "transition-all duration-300",
-                          isOpen ? "opacity-100" : "opacity-0"
+                          isCollapsed ? "opacity-0" : "opacity-100"
                         )}>
                           {item.label}
                         </span>

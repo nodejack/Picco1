@@ -73,7 +73,7 @@ export const LeaderboardUser: React.FC<LeaderboardUserProps> = ({
         ) : (
           <p className="text-xl font-bold text-[var(--text-secondary-light)] w-8 text-center">{rank}</p>
         )}
-        <div 
+        <div
           className={cn(
             'w-12 h-12 rounded-full flex items-center justify-center',
             currentRankStyle ? `border-2 ${currentRankStyle.avatar}` : ''
@@ -83,7 +83,7 @@ export const LeaderboardUser: React.FC<LeaderboardUserProps> = ({
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <p className="text-lg font-bold">{name}</p>
-            {isVerified && <CheckCircle className="text-blue-400" size={16} title="Verified" />}
+            {isVerified && <CheckCircle className="text-blue-400" size={16} />}
           </div>
           <div className="flex gap-4 text-xs mt-1 text-[var(--text-secondary-light)]">
             <span><span className="font-bold text-white">{correct}</span> Correct</span>
@@ -91,9 +91,9 @@ export const LeaderboardUser: React.FC<LeaderboardUserProps> = ({
           </div>
         </div>
         {rank > 3 ? (
-            <Button variant="ghost" size="icon" className="text-[var(--text-secondary-light)] hover:text-white">
-                <History size={20} />
-            </Button>
+          <Button variant="ghost" size="icon" className="text-[var(--text-secondary-light)] hover:text-white">
+            <History size={20} />
+          </Button>
         ) : isFollowing ? (
           <Button className="bg-[var(--primary-green)] text-black font-bold py-2 px-4 rounded-full text-sm h-auto hover:bg-emerald-400">
             Following

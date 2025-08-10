@@ -87,16 +87,8 @@ export const TelegramProvider: React.FC<TelegramProviderProps> = ({ children }) 
         WebApp.MainButton.color = '#19E6A2';
         WebApp.MainButton.textColor = '#FFFFFF';
 
-        // Show back button
-        WebApp.BackButton.show();
-        WebApp.BackButton.onClick(() => {
-          // Handle back navigation - you can customize this
-          if (window.history.length > 1) {
-            window.history.back();
-          } else {
-            WebApp.close();
-          }
-        });
+        // Hide back button to show native Close button instead
+        WebApp.BackButton.hide();
 
         setIsReady(true);
 

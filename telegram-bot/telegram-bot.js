@@ -149,6 +149,11 @@ bot.on("message", async (msg) => {
     return;
   }
 
+  // Skip if message is empty or not text
+  if (!messageText) {
+    return;
+  }
+
   // For any other message, send the welcome message with buttons
   const username = msg.from.first_name;
 
