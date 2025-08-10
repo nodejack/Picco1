@@ -1,92 +1,108 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Home, Activity, Trophy, User, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { useSidebar } from '@/context/SidebarContext';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Button } from '../ui/button';
+"use client";
 
-const navItems = [
-    { icon: Home, label: 'Home', path: '/' },
-    { icon: Activity, label: 'Predictions', path: '/predictions' },
-    { icon: Trophy, label: 'Leaderboard', path: '/leaderboard' },
-    { icon: User, label: 'Profile', path: '/profile' },
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import { Home, TrendingUp, Trophy, User } from "lucide-react";
+import { useSidebar } from "@/context/SidebarContext";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+
+const navigationItems = [
+  { name: "home", label: "Home", href: "/", icon: Home },
+  { name: "predictions", label: "Predictions", href: "/predictions", icon: TrendingUp },
+  { name: "leaderboard", label: "Leaderboard", href: "/leaderboard", icon: Trophy },
+  { name: "profile", label: "Profile", href: "/profile", icon: User },
 ];
 
-export const Navigation = () => {
+export function Navigation() {
   const location = useLocation();
-  const { isCollapsed, setIsCollapsed } = useSidebar();
+  const { isOpen, toggleSidebar } = useSidebar();
+  const [isTelegramWebApp, setIsTelegramWebApp] = useState(false);
+
+  useEffect(() => {
+    setIsTelegramWebApp(window.Telegram?.WebApp !== undefined);
+  }, []);
 
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className={cn(
-        "fixed top-16 left-0 z-20 hidden h-[calc(100vh-4rem)] flex-col justify-start border-r border-[var(--border-color)] bg-[var(--background-dark)] p-4 transition-all duration-300 md:flex",
-        isCollapsed ? 'w-20' : 'w-64'
-      )}>
-        <nav className="flex flex-col items-stretch justify-start gap-2">
-          {navItems.map((item) => {
-            const isActive = location.pathname === item.path;
-            const Icon = item.icon;
-            return (
-              <Tooltip key={item.label} disableHoverableContent={!isCollapsed}>
-                <TooltipTrigger asChild>
-                  <Link
-                    to={item.path}
-                    className={cn(
-                      'flex flex-row items-center justify-start gap-3 rounded-lg p-3 transition-colors',
-                      isActive ? 'bg-[var(--surface-dark)] text-[var(--primary-green)]' : 'text-[var(--text-secondary-light)] hover:bg-zinc-800 hover:text-white',
-                      isCollapsed && 'justify-center'
-                    )}
-                  >
-                    <Icon className="h-7 w-7 flex-shrink-0" />
-                    <span className={cn('text-base', isActive ? 'font-bold' : 'font-medium', isCollapsed && 'hidden')}>
+      <aside
+        className={cn(
+          "hidden md:flex flex-col fixed left-0 top-0 h-full bg-[var(--surface)] border-r border-[var(--border-color)] transition-all duration-300 z-30",
+          isOpen ? "w-64" : "w-20"
+        )}
+      >
+        <div className="flex-1 py-4">
+          <div className="px-3 py-2">
+            <h1 className={cn(
+              "text-xl font-bold text-[var(--text-primary)] transition-all duration-300",
+              isOpen ? "opacity-100" : "opacity-0"
+            )}>
+              Picco
+            </h1>
+          </div>
+          <nav className="px-3 space-y-2">
+            <TooltipProvider>
+              {navigationItems.map((item) => {
+                const isActive = location.pathname === item.href;
+                return (
+                  <Tooltip key={item.name} delayDuration={0}>
+                    <TooltipTrigger asChild>
+                      <Link
+                        to={item.href}
+                        className={cn(
+                          "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors",
+                          isActive
+                            ? "bg-[var(--primary-green)] text-white"
+                            : "text-[var(--text-secondary)] hover:bg-[var(--surface-light)] hover:text-[var(--text-primary)]"
+                        )}
+                      >
+                        <item.icon className="h-5 w-5 flex-shrink-0" />
+                        <span className={cn(
+                          "transition-all duration-300",
+                          isOpen ? "opacity-100" : "opacity-0"
+                        )}>
+                          {item.label}
+                        </span>
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent side="right" className="md:hidden">
                       {item.label}
-                    </span>
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="right" className="border-zinc-700 bg-zinc-800 text-white">
-                  <p>{item.label}</p>
-                </TooltipContent>
-              </Tooltip>
-            );
-          })}
-        </nav>
-        <div className="mt-auto">
-          <Button variant="ghost" onClick={() => setIsCollapsed(!isCollapsed)} className="w-full justify-start gap-3 rounded-lg p-3 text-[var(--text-secondary-light)] hover:bg-zinc-800 hover:text-white">
-            {isCollapsed ? <PanelLeftOpen className="h-7 w-7" /> : <PanelLeftClose className="h-7 w-7" />}
-            <span className={cn(isCollapsed && 'hidden')}>Collapse</span>
-          </Button>
+                    </TooltipContent>
+                  </Tooltip>
+                );
+              })}
+            </TooltipProvider>
+          </nav>
         </div>
       </aside>
 
-      {/* Mobile Footer - Enhanced for Telegram WebApp */}
-      <footer className="fixed bottom-0 left-0 right-0 z-20 flex h-24 flex-row justify-around bg-[var(--background-dark)] border-t border-[var(--border-color)] md:hidden" 
-              style={{ 
-                paddingBottom: 'max(8px, env(safe-area-inset-bottom))',
-                paddingTop: '8px'
-              }}>
-        {navItems.map((item) => {
-          const isActive = location.pathname === item.path;
-          const Icon = item.icon;
-          return (
-            <Link
-              key={item.label}
-              to={item.path}
-              className={cn(
-                'flex w-full flex-col items-center justify-center gap-1 p-3 transition-colors min-h-[60px] touch-manipulation',
-                isActive ? 'text-[var(--primary-green)]' : 'text-[var(--text-secondary-light)]'
-              )}
-              style={{ WebkitTapHighlightColor: 'transparent' }}
-            >
-              <Icon className="h-8 w-8 flex-shrink-0" />
-              <span className={cn('text-sm leading-tight', isActive ? 'font-bold' : 'font-medium')}>
-                {item.label}
-              </span>
-            </Link>
-          );
-        })}
-      </footer>
+      {/* Mobile Bottom Navigation */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--surface-dark)] border-t border-[var(--border-color)] z-40">
+        <div className="flex items-center justify-around h-24 pb-[env(safe-area-inset-bottom)]">
+          {navigationItems.map((item) => {
+            const isActive = location.pathname === item.href;
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={cn(
+                  "flex flex-col items-center justify-center gap-1 py-2 px-3 min-w-0 flex-1 transition-colors",
+                  isActive
+                    ? "text-[var(--primary-green)]"
+                    : "text-[var(--text-secondary)]"
+                )}
+              >
+                <Icon className="h-8 w-8 flex-shrink-0" />
+                <span className={cn('text-sm leading-tight', isActive ? 'font-medium' : 'font-normal')}>
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
     </>
   );
-};
+}
