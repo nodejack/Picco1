@@ -53,24 +53,8 @@ bot.onText(/\/start(.*)/, async (msg, match) => {
   }
 });
 
-// Additional handler specifically for BotFather's Start button
+// Handle any text message (auto-trigger welcome for new users)
 bot.on("message", async (msg) => {
-  // Check if this is a /start command that might have been missed
-  if (msg.text === "/start") {
-    console.log(`🔄 Detected /start command in general handler from ${msg.from.first_name}`);
-    // Manually trigger the start handler
-    const chatId = msg.chat.id;
-    const username = msg.from.first_name;
-    
-    try {
-      await sendWelcomeMessage(chatId, username, null);
-      console.log(`✅ Manual /start handler executed for ${username} (${chatId})`);
-      return; // Exit early to prevent general message handling
-    } catch (error) {
-      console.error(`❌ Manual /start handler failed for ${username} (${chatId}):`, error);
-    }
-  }
-  
   const chatId = msg.chat.id;
   const messageText = msg.text;
 
