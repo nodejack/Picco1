@@ -47,6 +47,23 @@ Picco is a crypto prediction application that allows users to make predictions o
 - **Mobile Optimized**: Enhanced navigation specifically for Telegram's mobile environment
 - **HTTP Health Checks**: Simple server for deployment platform requirements
 
+### 7. Telegram WebApp SDK Integration
+- **Full-Screen Launch**: App opens immediately expanded (no swipe up needed)
+- **Native Header**: Telegram's native Close/Menu buttons like Notcoin
+- **User Authentication**: Automatic user recognition via Telegram data
+- **Haptic Feedback**: Phone vibrations on interactions and votes
+- **Native Alerts**: Telegram-style popups and confirmations
+- **Theme Integration**: Adapts to user's Telegram theme colors
+- **Back Button**: Native Telegram navigation functionality
+
+### 8. Personalized User Experience
+- **Real User Data**: Shows actual Telegram name, username, and profile photo
+- **Premium Recognition**: Special badges and indicators for Telegram Premium users
+- **Personalized Referrals**: Dynamic referral codes based on Telegram user ID
+- **Enhanced Sharing**: Telegram-specific sharing functionality
+- **Status Indicators**: Shows "Telegram Mini App" vs "Web Browser" status
+- **Graceful Fallbacks**: Works seamlessly for non-Telegram users
+
 ## Technical Implementation
 
 ### State Management
@@ -167,6 +184,7 @@ Picco is a crypto prediction application that allows users to make predictions o
 ### Bot Features
 - **Command Handlers**: `/start`, `/help`, `/leaderboard`, `/predictions`
 - **Mini App Integration**: Native `web_app` buttons instead of external links
+- **Auto-Welcome**: Responds to any message with welcome buttons
 - **User Experience**: Seamless in-app navigation without browser prompts
 - **Error Handling**: Comprehensive error logging and graceful failures
 - **Health Monitoring**: HTTP endpoints for deployment platform health checks
@@ -177,6 +195,7 @@ Picco is a crypto prediction application that allows users to make predictions o
 /help - Show available commands and tips
 /leaderboard - Quick access to leaderboard with Mini App button
 /predictions - Direct access to predictions with Mini App button
+Any message - Triggers welcome message for new users
 ```
 
 ### Technical Stack
@@ -185,6 +204,92 @@ Picco is a crypto prediction application that allows users to make predictions o
 - **Environment**: dotenv for configuration
 - **HTTP Server**: Built-in Node.js HTTP module for health checks
 - **Polling**: Telegram long polling for real-time message handling
+
+## Telegram WebApp SDK Integration
+
+### Core SDK Features
+- **@twa-dev/sdk**: Official Telegram WebApp SDK integration
+- **Auto-Expand**: `WebApp.expand()` called immediately on launch
+- **Header Styling**: `WebApp.setHeaderColor('#0A0A0F')` matches app theme
+- **Closing Confirmation**: `WebApp.enableClosingConfirmation()` prevents accidental exits
+- **Back Button**: Native Telegram back button with custom navigation logic
+
+### User Data Integration
+```typescript
+interface TelegramUser {
+  id: number;
+  first_name: string;
+  last_name?: string;
+  username?: string;
+  language_code?: string;
+  is_premium?: boolean;
+  photo_url?: string;
+}
+```
+
+### Native Features Implementation
+- **Haptic Feedback**: Phone vibrations on interactions
+  - `WebApp.HapticFeedback.impactOccurred('medium')`
+  - `WebApp.HapticFeedback.notificationOccurred('success')`
+- **Native Alerts**: Telegram-style popups
+  - `WebApp.showAlert(message)`
+  - `WebApp.showConfirm(message, callback)`
+- **Theme Integration**: Adapts to user's Telegram theme
+  - `WebApp.themeParams.bg_color`
+  - `WebApp.themeParams.text_color`
+
+### Context Provider Architecture
+```typescript
+// TelegramProvider wraps entire app
+<TelegramProvider>
+  <App />
+</TelegramProvider>
+
+// Components use Telegram context
+const { user, hapticFeedback, showAlert } = useTelegram();
+```
+
+## Personalized User Experience
+
+### Profile Integration
+- **Real Names**: Shows actual Telegram `first_name + last_name`
+- **Usernames**: Displays `@username` from Telegram account
+- **Profile Photos**: Uses `photo_url` from Telegram if available
+- **Premium Badges**: Special indicators for Telegram Premium users
+
+### Dynamic Referral System
+```typescript
+const generateReferralCode = () => {
+  if (user?.id) {
+    const hash = user.id.toString(36).toUpperCase().slice(-3);
+    return `PICCO-${hash}${user.first_name.slice(0, 2).toUpperCase()}`;
+  }
+  return 'PICCO-X42'; // Fallback
+};
+```
+
+### Enhanced Sharing
+- **Telegram Users**: Native sharing with formatted messages
+- **Web Users**: Standard clipboard functionality
+- **Smart Detection**: Different UX based on platform
+
+## Development Environment Setup
+
+### Telegram WebApp Testing
+1. **Local Development**: Works in browser with fallbacks
+2. **Telegram Testing**: Use ngrok or deploy to test in Telegram
+3. **Debug Mode**: Console logs show Telegram WebApp status
+4. **Fallback Handling**: Graceful degradation for non-Telegram users
+
+### Environment Variables
+```env
+# Frontend (Netlify/Vercel)
+VITE_APP_URL=https://your-app.netlify.app
+
+# Bot (Render)
+TELEGRAM_BOT_TOKEN=your_bot_token
+APP_URL=https://your-app.netlify.app
+```
 
 ## Future Roadmap
 

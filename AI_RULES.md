@@ -125,6 +125,23 @@
 - **Touch Optimization**: 44px+ minimum touch targets with safe area handling
 - **Deployment**: Bot hosted on Render with HTTP health checks
 
+### 9. Telegram WebApp SDK Features
+- **Full-Screen Launch**: App opens immediately expanded like Notcoin (no swipe up)
+- **Native Header**: Telegram's native Close/Menu buttons and styling
+- **User Authentication**: Automatic user recognition via Telegram user data
+- **Haptic Feedback**: Phone vibrations on votes and interactions
+- **Native Alerts**: Telegram-style popups instead of browser alerts
+- **Theme Integration**: Adapts to user's Telegram theme colors
+- **Back Button**: Native Telegram navigation with proper handling
+
+### 10. Personalized User Experience
+- **Real User Data**: Profile shows actual Telegram name, username, and photo
+- **Premium Recognition**: Special badges for Telegram Premium users (⭐)
+- **Dynamic Referrals**: Personalized referral codes based on Telegram user ID
+- **Enhanced Sharing**: Telegram-specific sharing with native functionality
+- **Status Indicators**: Shows "Telegram Mini App" vs "Web Browser" mode
+- **Graceful Fallbacks**: Full compatibility for non-Telegram users
+
 ## Current Limitations
 
 1. **Data**: All data is currently static/hardcoded
