@@ -25,8 +25,9 @@ bot.onText(/\/start(.*)/, async (msg, match) => {
   const username = msg.from.first_name;
   const startParam = match[1] ? match[1].trim() : null;
   
-  // Log for monitoring
+  // Enhanced logging for debugging
   console.log(`📱 /start command received from ${username} (${chatId})${startParam ? ` with param: ${startParam}` : ''}`);
+  console.log(`📋 Full message object:`, JSON.stringify(msg, null, 2));
   
   try {
     await sendWelcomeMessage(chatId, username, startParam);
@@ -49,6 +50,94 @@ bot.onText(/\/start(.*)/, async (msg, match) => {
     } catch (retryError) {
       console.error(`❌ Fallback message also failed for ${username} (${chatId}):`, retryError);
     }
+  }
+});
+
+// Additional handler specifically for BotFather's Start button
+bot.on("message", async (msg) => {
+  // Check if this is a /start command that might have been missed
+  if (msg.text === "/start") {
+    console.log(`🔄 Detected /start command in general handler from ${msg.from.first_name}`);
+    // Manually trigger the start handler
+    const chatId = msg.chat.id;
+    const username = msg.from.first_name;
+    
+    try {
+      await sendWelcomeMessage(chatId, username, null);
+      console.log(`✅ Manual /start handler executed for ${username} (${chatId})`);
+      return; // Exit early to prevent general message handling
+    } catch (error) {
+      console.error(`❌ Manual /start handler failed for ${username} (${chatId}):`, error);
+    }
+  }
+  
+  const chatId = msg.chat.id;
+  const messageText = msg.text;
+
+  // Skip if it's a command (already handled by onText handlers)
+  if (messageText && messageText.startsWith("/")) {
+    console.log(`🔄 Command ${messageText} handled by dedicated handler`);
+    return;
+  }
+
+  // Skip if message is empty or not text
+  if (!messageText) {
+    return;
+  }
+
+  // For any other message, send the welcome message with buttons
+  const username = msg.from.first_name;
+  console.log(`💬 General message received from ${username} (${chatId}): "${messageText}"`);
+
+  try {
+    const welcomeMessage = `👋 Hey ${username}! Welcome to *Picco*!
+
+🎯 *Crypto Prediction Platform*
+
+Ready to start predicting crypto prices and compete on the leaderboard?
+
+Tap the button below to launch the app! 🚀`;
+
+    const keyboard = {
+      inline_keyboard: [
+        [
+          {
+            text: "🚀 Launch Picco",
+            web_app: {
+              url: APP_URL,
+            },
+          },
+        ],
+        [
+          {
+            text: "📊 Leaderboard",
+            web_app: {
+              url: `${APP_URL}/leaderboard`,
+            },
+          },
+          {
+            text: "🎯 Predictions",
+            web_app: {
+              url: `${APP_URL}/predictions`,
+            },
+          },
+        ],
+        [
+          {
+            text: "ℹ️ Help",
+            callback_data: "show_help",
+          },
+        ],
+      ],
+    };
+
+    await bot.sendMessage(chatId, welcomeMessage, {
+      parse_mode: "Markdown",
+      reply_markup: keyboard,
+    });
+    console.log(`✅ General welcome message sent to ${username} (${chatId})`);
+  } catch (error) {
+    console.error(`❌ Failed to send general welcome message to ${username} (${chatId}):`, error);
   }
 });
 
@@ -178,77 +267,7 @@ bot.onText(/\/predictions/, async (msg) => {
   );
 });
 
-// Handle any text message (auto-trigger welcome for new users)
-bot.on("message", async (msg) => {
-  const chatId = msg.chat.id;
-  const messageText = msg.text;
 
-  // Skip if it's a command (already handled by onText handlers)
-  if (messageText && messageText.startsWith("/")) {
-    console.log(`🔄 Command ${messageText} handled by dedicated handler`);
-    return;
-  }
-
-  // Skip if message is empty or not text
-  if (!messageText) {
-    return;
-  }
-
-  // For any other message, send the welcome message with buttons
-  const username = msg.from.first_name;
-  console.log(`💬 General message received from ${username} (${chatId}): "${messageText}"`);
-
-  try {
-    const welcomeMessage = `👋 Hey ${username}! Welcome to *Picco*!
-
-🎯 *Crypto Prediction Platform*
-
-Ready to start predicting crypto prices and compete on the leaderboard?
-
-Tap the button below to launch the app! 🚀`;
-
-    const keyboard = {
-      inline_keyboard: [
-        [
-          {
-            text: "🚀 Launch Picco",
-            web_app: {
-              url: APP_URL,
-            },
-          },
-        ],
-        [
-          {
-            text: "📊 Leaderboard",
-            web_app: {
-              url: `${APP_URL}/leaderboard`,
-            },
-          },
-          {
-            text: "🎯 Predictions",
-            web_app: {
-              url: `${APP_URL}/predictions`,
-            },
-          },
-        ],
-        [
-          {
-            text: "ℹ️ Help",
-            callback_data: "show_help",
-          },
-        ],
-      ],
-    };
-
-    await bot.sendMessage(chatId, welcomeMessage, {
-      parse_mode: "Markdown",
-      reply_markup: keyboard,
-    });
-    console.log(`✅ General welcome message sent to ${username} (${chatId})`);
-  } catch (error) {
-    console.error(`❌ Failed to send general welcome message to ${username} (${chatId}):`, error);
-  }
-});
 
 // Handle callback queries (button clicks)
 bot.on("callback_query", async (callbackQuery) => {
