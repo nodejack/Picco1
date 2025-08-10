@@ -1,17 +1,96 @@
-import React from 'react';
 import { LeaderboardUser } from './LeaderboardUser';
 
 const leaderboardData = [
-  { rank: 1, name: 'CryptoKing', avatar: 'https://robohash.org/CryptoKing.png', points: 12500, isCurrentUser: false },
-  { rank: 2, name: 'DiamondHands', avatar: 'https://robohash.org/DiamondHands.png', points: 11800, isCurrentUser: false },
-  { rank: 3, name: 'Satoshi Jr.', avatar: 'https://robohash.org/Satoshi%20Jr.png', points: 11250, isCurrentUser: false },
-  { rank: 4, name: 'You', avatar: 'https://robohash.org/You.png', points: 10500, isCurrentUser: true },
-  { rank: 5, name: 'ToTheMoon', avatar: 'https://robohash.org/ToTheMoon.png', points: 9800, isCurrentUser: false },
-  { rank: 6, name: 'LaserEyes', avatar: 'https://robohash.org/LaserEyes.png', points: 9200, isCurrentUser: false },
-  { rank: 7, name: 'Hodler', avatar: 'https://robohash.org/Hodler.png', points: 8750, isCurrentUser: false },
-  { rank: 8, name: 'WhaleWatcher', avatar: 'https://robohash.org/WhaleWatcher.png', points: 8100, isCurrentUser: false },
-  { rank: 9, name: 'AltcoinQueen', avatar: 'https://robohash.org/AltcoinQueen.png', points: 7600, isCurrentUser: false },
-  { rank: 10, name: 'FOMO_Sapien', avatar: 'https://robohash.org/FOMO_Sapien.png', points: 7100, isCurrentUser: false },
+  { 
+    rank: 1, 
+    name: 'CryptoKing', 
+    isVerified: true, 
+    correct: 284, 
+    streak: 15, 
+    isFollowing: false, 
+    rankChange: 'up' as const 
+  },
+  { 
+    rank: 2, 
+    name: 'DiamondHands', 
+    isVerified: true, 
+    correct: 267, 
+    streak: 12, 
+    isFollowing: true, 
+    rankChange: null 
+  },
+  { 
+    rank: 3, 
+    name: 'Satoshi Jr.', 
+    isVerified: false, 
+    correct: 251, 
+    streak: 8, 
+    isFollowing: false, 
+    rankChange: 'down' as const 
+  },
+  { 
+    rank: 4, 
+    name: 'ToTheMoon', 
+    isVerified: true, 
+    correct: 243, 
+    streak: 22, 
+    isFollowing: false, 
+    rankChange: 'up' as const 
+  },
+  { 
+    rank: 5, 
+    name: 'LaserEyes', 
+    isVerified: false, 
+    correct: 238, 
+    streak: 5, 
+    isFollowing: true, 
+    rankChange: null 
+  },
+  { 
+    rank: 6, 
+    name: 'Hodler', 
+    isVerified: true, 
+    correct: 229, 
+    streak: 18, 
+    isFollowing: false, 
+    rankChange: 'up' as const 
+  },
+  { 
+    rank: 7, 
+    name: 'WhaleWatcher', 
+    isVerified: false, 
+    correct: 221, 
+    streak: 3, 
+    isFollowing: false, 
+    rankChange: 'down' as const 
+  },
+  { 
+    rank: 8, 
+    name: 'AltcoinQueen', 
+    isVerified: true, 
+    correct: 215, 
+    streak: 11, 
+    isFollowing: true, 
+    rankChange: null 
+  },
+  { 
+    rank: 9, 
+    name: 'FOMO_Sapien', 
+    isVerified: false, 
+    correct: 208, 
+    streak: 7, 
+    isFollowing: false, 
+    rankChange: 'up' as const 
+  },
+  { 
+    rank: 10, 
+    name: 'CryptoNinja', 
+    isVerified: true, 
+    correct: 201, 
+    streak: 14, 
+    isFollowing: false, 
+    rankChange: 'down' as const 
+  },
 ];
 
 export const Leaderboard = () => {
